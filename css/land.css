@@ -1,0 +1,127 @@
+#land {
+   width: 800px;
+   height: 800px;
+   background-color: rgba(131, 173, 173, 0.867);
+   background-image: url("../img/background/texture2.jpg");
+   background-size: cover;
+   display: flex;
+   flex-direction: column;
+}
+
+#top {
+    width: 100%;
+    height: 100px;
+    display: flex;
+}
+
+#midle {
+    width: 100%;
+    height: 600px;
+    display: flex;
+}
+
+#bottom {
+    width: 100%;
+    height: 100px;
+    display: flex;
+}
+
+#leftSide {
+    width: 100px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#midleMain {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#rightSide {
+    width: 100px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentCards {
+    width: 600px;
+    height: 100px;
+    display: flex;
+}
+
+.cornerBlocks {
+    width: 100px;
+    height: 100px;
+    background-color: #e64848;
+}
+
+
+/* VERTICAL */
+.cardBasicVertical {
+    width: calc(100% / 9);
+    height: 100px;
+    background-color: #fff;
+    box-shadow: 2px 2px 0px 0px #000 inset;
+}
+
+.cardRailroadVertical {
+    width: calc(100% / 9);
+    height: 100px;
+    background-color: #000;
+}
+
+.cardChestVertical {
+    width: calc(100% / 9);
+    height: 100px;
+    background-color: #67ebeb;
+}
+
+.cardChanseVertical {
+    width: calc(100% / 9);
+    height: 100px;
+    background-color: #6370e4;
+}
+
+.cardTaxVertical {
+    width: calc(100% / 9);
+    height: 100px;
+    background-color: #e5e90d;
+}
+
+
+/* HORIZONTAL */
+.cardBasicHorizontal {
+    width: 100px;
+    height: calc(100% / 9);
+    background-color: #fff;
+    box-shadow: 2px 2px 0px 0px #000 inset;
+}
+
+.cardRailroadHorizontal {
+    width: 100px;
+    height: calc(100% / 9);
+    background-color: #000;
+}
+
+.cardChestHorizontal {
+    width: 100px;
+    height: calc(100% / 9);
+    background-color: #67ebeb;
+}
+
+.cardChanseHorizontal{
+    width: 100px;
+    height: calc(100% / 9);
+    background-color: #6370e4;
+}
+
+.cardTaxHorizontal {
+    width: 100px;
+    height: calc(100% / 9);
+    background-color: #e5e90d;
+}

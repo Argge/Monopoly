@@ -1,0 +1,52 @@
+    <div id="valueDice1">
+        <div class="dot"></div>
+    </div>
+
+    <div id="valueDice2">
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <div id="valueDice3">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <div id="valueDice4">
+        <div id="topDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div id="bottomDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <div id="valueDice5">
+        <div id="topDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="midleDots">
+            <div class="dot"></div>
+        </div>
+        <div id="bottomDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+     <div id="valueDice6">
+        <div id="topDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div id="bottomDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>

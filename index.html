@@ -6,40 +6,80 @@
     <title>Monopoly</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/land.css">
+    <link rel="stylesheet" href="css/dice.css">
 </head>
 <body>
     <div id="main">
         <div id="land">
             <div id="top">
-                <div class="cornerBlocks"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardChanse"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardReadingRailroad"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardTax"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cornerBlocks"></div>
+                <div class="cornerBlocks" id="vacationBlock">Vacation</div>
+                <div class="contentCards">
+                    <div class="cardBasicVertical">5-1</div>
+                    <div class="cardChanseVertical"></div>
+                    <div class="cardBasicVertical">5-2</div>
+                    <div class="cardBasicVertical">5-3</div>
+                    <div class="cardRailroadVertical"></div>
+                    <div class="cardBasicVertical">6-1</div>
+                    <div class="cardBasicVertical">6-2</div>
+                    <div class="cardTaxVertical"></div>
+                    <div class="cardBasicVertical">6-3</div>
+                </div>
+                <div class="cornerBlocks" id="toGoJailBlock">Go to Jail</div>
             </div>
             <div id="midle">
-                <div id="leftSide"></div>
-                <div id="midleMain"></div>
-                <div id="rightSide"></div>
+                <div id="leftSide">
+                    <div class="cardBasicHorizontal">4-3</div>
+                    <div class="cardBasicHorizontal">4-2</div>
+                    <div class="cardChestHorizontal"></div>
+                    <div class="cardBasicHorizontal">4-1</div>
+                    <div class="cardRailroadHorizontal"></div>
+                    <div class="cardBasicHorizontal">3-3</div>
+                    <div class="cardBasicHorizontal">3-2</div>
+                    <div class="cardTaxHorizontal"></div>
+                    <div class="cardBasicHorizontal">3-1</div>
+                </div>
+                <div id="midleMain">
+                    <div id="gamingDice">
+                        <div id="valueDice6">
+                            <div id="topDots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                            <div id="bottomDots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="rightSide">
+                    <div class="cardBasicHorizontal">7-1</div>
+                    <div class="cardBasicHorizontal">7-2</div>
+                    <div class="cardChestHorizontal"></div>
+                    <div class="cardBasicHorizontal">7-3</div>
+                    <div class="cardRailroadHorizontal"></div>
+                    <div class="cardChanseHorizontal"></div>
+                    <div class="cardBasicHorizontal">8-1</div>
+                    <div class="cardTaxHorizontal"></div>
+                    <div class="cardBasicHorizontal">8-2</div>
+                </div>
             </div>
             <div id="bottom">
-                <div class="cornerBlocks"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardChanse"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardReadingRailroad"></div>
-                <div class="cardTax"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cardChest"></div>
-                <div class="cardBasicVertical"></div>
-                <div class="cornerBlocks"></div>
+                <div class="cornerBlocks" id="jailBlock">Jail</div>
+                <div class="contentCards">
+                    <div class="cardBasicVertical">2-3</div>
+                    <div class="cardBasicVertical">2-2</div>
+                    <div class="cardChanseVertical"></div>
+                    <div class="cardBasicVertical">2-1</div>
+                    <div class="cardRailroadVertical"></div>
+                    <div class="cardTaxVertical"></div>
+                    <div class="cardBasicVertical">1-2</div>
+                    <div class="cardChestVertical"></div>
+                    <div class="cardBasicVertical">1-1</div>
+                </div>
+                <div class="cornerBlocks" id="startBlock">Start</div>
             </div>
         </div>
     </div>

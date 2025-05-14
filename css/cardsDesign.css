@@ -1,7 +1,7 @@
 /* VERTICAL */
 .cardBasicVertical {
     width: calc(100% / 9);
-    height: 100px;
+    height: 140px;
     background-color: #fff;
     /* box-shadow: 2px 2px 0px 0px #000 inset; */
     display: flex;
@@ -11,57 +11,69 @@
 
 .cardRailroadVertical {
     width: calc(100% / 9);
-    height: 100px;
+    height: 140px;
     background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardChestVertical {
     width: calc(100% / 9);
-    height: 100px;
+    height: 140px;
     background-color: #67ebeb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardChanseVertical {
     width: calc(100% / 9);
-    height: 100px;
+    height: 140px;
     background-color: #6370e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardTaxVertical {
     width: calc(100% / 9);
-    height: 100px;
+    height: 140px;
     background-color: #e5e90d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 /* HORIZONTAL */
 .cardBasicHorizontal {
-    width: 100px;
+    width: 140px;
     height: calc(100% / 9);
     background-color: #fff;
     box-shadow: 2px 2px 0px 0px #000 inset;
 }
 
 .cardRailroadHorizontal {
-    width: 100px;
+    width: 140px;
     height: calc(100% / 9);
     background-color: #000;
 }
 
 .cardChestHorizontal {
-    width: 100px;
+    width: 140px;
     height: calc(100% / 9);
     background-color: #67ebeb;
 }
 
 .cardChanseHorizontal{
-    width: 100px;
+    width: 140px;
     height: calc(100% / 9);
     background-color: #6370e4;
 }
 
 .cardTaxHorizontal {
-    width: 100px;
+    width: 140px;
     height: calc(100% / 9);
     background-color: #e5e90d;
 }
@@ -69,10 +81,19 @@
 /* DESIGN OF CARDS */
 .mainContent {
     width: 95%;
-    height: 95px;
-    background-color: #4b4b4b;
+    height: 95%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #e6e6e6;
+}
+
+.mainContentFill {
+    width: 95%;
+    height: 95%;
+    background-color: #262626;
+    color: #e6e6e6; 
 }
 
 .topSection {
@@ -83,12 +104,22 @@
     align-items: center;
 }
 
-.basic1 {
-    background-color: #f7ecec;
-    background-image:  url(../img/tris.jpg);
-    background-size: cover;
+.bottomSection {
+    width: 100%;
+    height: 110px;
+    background-color: #262626;
 }
 
-.basic2 {
-    background-color: #6370e4;
+.basicBG1 {
+    background-color: #a75050;
+    background-image:  url(../img/tris.jpg);
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.basicBG2 {
+    background-color:  #6370e4;
+    background-image:  url(../img/tris.jpg);
+    background-size: cover;
+    background-blend-mode: overlay;
 }

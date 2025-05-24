@@ -3,7 +3,6 @@
     width: calc(100% / 9);
     height: 140px;
     background-color: #fff;
-    /* box-shadow: 2px 2px 0px 0px #000 inset; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +50,9 @@
     width: 140px;
     height: calc(100% / 9);
     background-color: #fff;
-    box-shadow: 2px 2px 0px 0px #000 inset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardRailroadHorizontal {
@@ -79,7 +80,7 @@
 }
 
 /* DESIGN OF CARDS */
-.mainContent {
+.mainContentVertical {
     width: 95%;
     height: 95%;
     display: flex;
@@ -89,11 +90,16 @@
     color: #e6e6e6;
 }
 
+.mainContentHorizontal {
+    width: ;
+}
+
 .mainContentFill {
     width: 95%;
     height: 95%;
     background-color: #262626;
-    color: #e6e6e6; 
+    color: #e6e6e6;
+    border-radius: 5px; 
 }
 
 .topSection {
@@ -108,18 +114,17 @@
     width: 100%;
     height: 110px;
     background-color: #262626;
+    border-radius: 5px  ;
 }
 
 .basicBG1 {
-    background-color: #a75050;
-    background-image:  url(../img/tris.jpg);
+    background: linear-gradient(to bottom, #d32a2a, #6a0d0d);
     background-size: cover;
     background-blend-mode: overlay;
 }
 
 .basicBG2 {
-    background-color:  #6370e4;
-    background-image:  url(../img/tris.jpg);
+    background: linear-gradient(to bottom, #2a5dd3, #183f9b);
     background-size: cover;
     background-blend-mode: overlay;
 }

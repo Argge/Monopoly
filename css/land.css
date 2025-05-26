@@ -59,7 +59,22 @@
 .cornerBlocks {
     width: 140px;
     height: 140px;
-    background-color: #dd5555;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #fff;
+}
+
+.cornerContent {
+    width: 95%;
+    height: 95%;
+    background-color: #262626;
+    border-radius: 5px 5px 18px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #startBlock {
@@ -68,7 +83,6 @@
 
 #jailBlock {
     border-radius: 0 0 0 20px;
-
 }
 
 #vacationBlock {
@@ -77,4 +91,20 @@
 
 #goToJailBlock {
     border-radius: 0 20px 0 0;    
+}
+
+#textCorner {
+    rotate: -45deg;
+}
+
+#cornerGoToJail {
+    rotate: 270deg;
+}
+
+#cornerJail {
+    rotate: 90deg;
+}
+
+#cornerVacation {
+    rotate: 180deg;
 }

@@ -91,7 +91,7 @@
     align-items: center;
 }
 
-/* DESIGN OF CARDS HORIZONTAL */
+/* DESIGN OF CARDS VERTICAL */
 .mainContentFill {
     width: 95%;
     height: 95%;
@@ -112,9 +112,16 @@
     width: 100%;
     height: 110px;
     background-color: #262626;
-    border-radius: 5px  ;
+    border-radius: 5px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
 }
 
+.playerSectionVertical {
+    width: 100%;
+    height: 50%;
+}
 
 /* DESIGN OF CARDS HORIZONTAL */
 .topSectionHorizontal {
@@ -130,6 +137,11 @@
     height: 100%;
     background-color: #262626;
     border-radius: 5px  ;
+}
+
+.playerSectionHorizontal {
+    width: 50%;
+    height: 100%;
 }
 
 
@@ -177,7 +189,7 @@
 
 /* BASIC BACKGROUNDS */
 .basicBG1 {
-    background: linear-gradient(to bottom, #d32a2a, #6a0d0d);
+    background: linear-gradient(to bottom, #e44848, #6a0d0d);
     background-size: cover;
     background-blend-mode: overlay;
 }
@@ -254,10 +266,71 @@ img {
     max-width: 76px;
 }
 
-.leftRotate {
+.rotateLeft{
     rotate: 90deg;
 }
 
-.topRotate {
+.rotateTop {
     rotate: 180deg;
+}
+
+.rotateRight {
+    rotate: 270deg;
+}
+
+/* LEVELS */
+.level0 {
+    width: 20px;
+    height: 60%;
+    background-color: #363636;
+    border-radius: 3px;
+}
+
+.level1 {
+   width: 20px;
+    height: 60%;
+    background-color: #51a72a;
+    border-radius: 3px; 
+}
+
+.levelsOfCard {
+    width: 76px;
+    height: 15px;
+    background-color: #4b4b4b;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* CARDS INFO */
+.cardInfoVerticalBottom {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+}
+
+.cardInfoVerticalTop {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+    rotate: 180deg;
+}
+
+.cardInfoHorizontalLeft {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+    rotate: 90deg;
 }

@@ -59,28 +59,82 @@
     width: 140px;
     height: calc(100% / 9);
     background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardChestHorizontal {
     width: 140px;
     height: calc(100% / 9);
     background-color: #67ebeb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardChanseHorizontal{
     width: 140px;
     height: calc(100% / 9);
     background-color: #6370e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardTaxHorizontal {
     width: 140px;
     height: calc(100% / 9);
     background-color: #e5e90d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* DESIGN OF CARDS */
-.mainContentVertical {
+/* DESIGN OF CARDS HORIZONTAL */
+.mainContentFill {
+    width: 95%;
+    height: 95%;
+    background-color: #262626;
+    color: #e6e6e6;
+    border-radius: 5px; 
+}
+
+.topSectionVertical {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottomSectionVertical {
+    width: 100%;
+    height: 110px;
+    background-color: #262626;
+    border-radius: 5px  ;
+}
+
+
+/* DESIGN OF CARDS HORIZONTAL */
+.topSectionHorizontal {
+    width: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottomSectionHorizontal {
+    width: 110px;
+    height: 100%;
+    background-color: #262626;
+    border-radius: 5px  ;
+}
+
+
+/* MAIN CONTENTS */
+.mainContentVerticalBottom {
     width: 95%;
     height: 95%;
     display: flex;
@@ -90,33 +144,38 @@
     color: #e6e6e6;
 }
 
-.mainContentHorizontal {
-    width: ;
-}
-
-.mainContentFill {
+.mainContentVerticalTop {
     width: 95%;
     height: 95%;
-    background-color: #262626;
-    color: #e6e6e6;
-    border-radius: 5px; 
-}
-
-.topSection {
-    width: 100%;
-    height: 30px;
     display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    color: #e6e6e6;
 }
 
-.bottomSection {
-    width: 100%;
-    height: 110px;
-    background-color: #262626;
-    border-radius: 5px  ;
+.mainContentHorizontalLeft {
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    color: #e6e6e6;
 }
 
+.mainContentHorizontalRight {
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #e6e6e6;
+}
+
+
+/* BASIC BACKGROUNDS */
 .basicBG1 {
     background: linear-gradient(to bottom, #d32a2a, #6a0d0d);
     background-size: cover;
@@ -127,4 +186,69 @@
     background: linear-gradient(to bottom, #2a5dd3, #183f9b);
     background-size: cover;
     background-blend-mode: overlay;
+}
+
+.basicBG3 {
+    background: linear-gradient(to left, #dbb539,  #b38b08);
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.basicBG4 {
+    background: linear-gradient(to left, #da6a2a,  #d65b14);
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.basicBG5 {
+    background: linear-gradient(to top, #47da2a,  #2ac20c);
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.basicBG6 {
+    background: linear-gradient(to top, #2adabd,  #0fbea1);
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.basicBG7 {
+    background: linear-gradient(to right, #2a59da,  #0736b6);
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.basicBG8 {
+    background: linear-gradient(to right, #b631df,  #8f09b8);
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.transitionBG1 {
+    background: 
+        linear-gradient(to bottom, #d32a2a, #6a0d0d 50%),
+        linear-gradient(to bottom, #2a5dd3, #183f9b 50%);
+}
+
+.transitionBG2 {
+    background: 
+        linear-gradient(to left, #dbb539,  #b38b08 50%),
+        linear-gradient(to left, #da6a2a,  #d65b14 50%);
+}
+
+.transitionBG3 {
+    background: 
+        linear-gradient(to top, #47da2a,  #2ac20c 50%),
+        linear-gradient(to top, #2adabd,  #0fbea1 50%);
+}
+
+.transitionBG4 {
+    background: 
+        linear-gradient(to right, #2a59da,  #0736b6 50%),
+        linear-gradient(to right, #b631df,  #8f09b8 50%);
+}
+
+/* LOGOS */
+img {
+    height: 20px;
 }

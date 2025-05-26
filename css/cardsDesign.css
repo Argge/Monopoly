@@ -251,4 +251,13 @@
 /* LOGOS */
 img {
     height: 20px;
+    max-width: 76px;
+}
+
+.leftRotate {
+    rotate: 90deg;
+}
+
+.topRotate {
+    rotate: 180deg;
 }

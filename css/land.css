@@ -34,14 +34,6 @@
     flex-direction: column;
 }
 
-#midleMain {
-    width: 720px;
-    height: 720px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #rightSide {
     width: 140px;
     height: 720px;
@@ -107,4 +99,66 @@
 
 #cornerVacation {
     rotate: 180deg;
+}
+
+/* MIDLE */
+#midleMain {
+    width: 720px;
+    height: 720px;
+    display: flex;
+}
+
+#leftPart {
+    width: calc(100%/3);
+    height: 100%;
+}
+
+#centralPart {
+    width: calc(100%/3);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#rightPart {
+    width: calc(100%/3);
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#randomBtn {
+    width: 100px;
+    height: 40px;
+    border: 0;
+    border-radius: 10px;
+    background-color: #262626;
+    color: #fff;
+}
+
+#randomBtn:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+.card {
+    width: 170px;
+    height: 250px;
+    background-color: #262626;
+    border-radius: 10px;
+}
+
+#leftCard {
+    rotate: 45deg;
+    position: relative;
+    left: 70px;
+    top: 30px;
+}
+
+#rightCard {
+    rotate: 45deg;
+    position: relative;
+    bottom: 30px;
 }

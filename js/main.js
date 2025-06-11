@@ -1,31 +1,37 @@
-const randomBtn = document.getElementById("randomBtn");
+import { movePlayer, createPlayer } from "./player.js";
 
+const randomBtn = document.getElementById("randomBtn");
 const gamingDice = document.getElementById("gamingDice");
 
+let diceNumber = 0;
+
 randomBtn.addEventListener("click", () => {
-    let number = randomDiceNumber();
+    diceNumber = randomDiceNumber();
     gamingDice.innerHTML = "";
 
-    if (number === 1) {
+    if (diceNumber === 1) {
         gamingDice1();
     }
-    else if (number === 2) {
+    else if (diceNumber === 2) {
         gamingDice2();
     }
-    else if (number === 3) {
+    else if (diceNumber === 3) {
         gamingDice3();
     }
-    else if (number === 4) {
+    else if (diceNumber === 4) {
         gamingDice4();
     }
-    else if (number === 5) {
+    else if (diceNumber === 5) {
         gamingDice5();
     }
     else {
         gamingDice6();
     }
 
-    console.log(number);
+    console.log(diceNumber);
+
+    movePlayer;
+    createPlayer;
 });
 
 function randomDiceNumber() {
@@ -83,7 +89,7 @@ function gamingDice4() {
 
     let topDiv = document.createElement("div");
     topDiv.id = "topDots";
-    gamingDice.appendChild(topDiv);
+    valueDice.appendChild(topDiv);
 
     let dot1 = document.createElement("div");
     dot1.classList.add("dot");
@@ -96,7 +102,7 @@ function gamingDice4() {
 
     let bottomDiv = document.createElement("div");
     bottomDiv.id = "bottomDots";
-    gamingDice.appendChild(bottomDiv);
+    valueDice.appendChild(bottomDiv);
 
     let dot3 = document.createElement("div");
     dot3.classList.add("dot");
@@ -115,7 +121,7 @@ function gamingDice5() {
 
     let topDiv = document.createElement("div");
     topDiv.id = "topDots";
-    gamingDice.appendChild(topDiv);
+    valueDice.appendChild(topDiv);
 
     let dot1 = document.createElement("div");
     dot1.classList.add("dot");
@@ -128,16 +134,16 @@ function gamingDice5() {
 
     let midleDiv = document.createElement("div");
     midleDiv.id = "midleDots";
-    gamingDice.appendChild(midleDiv);
+    valueDice.appendChild(midleDiv);
 
     let dot3 = document.createElement("div");
     dot3.classList.add("dot");
-    bottomDiv.appendChild(dot3);
+    midleDiv.appendChild(dot3);
 
 
     let bottomDiv = document.createElement("div");
     bottomDiv.id = "bottomDots";
-    gamingDice.appendChild(bottomDiv);
+    valueDice.appendChild(bottomDiv);
 
     let dot4 = document.createElement("div");
     dot4.classList.add("dot");
@@ -148,7 +154,7 @@ function gamingDice5() {
     bottomDiv.appendChild(dot5);
 }
 
-function gamingDice4() {
+function gamingDice6() {
     let valueDice = document.createElement("div");
     valueDice.id = "valueDice6";
     gamingDice.appendChild(valueDice);
@@ -156,7 +162,7 @@ function gamingDice4() {
 
     let topDiv = document.createElement("div");
     topDiv.id = "topDots";
-    gamingDice.appendChild(topDiv);
+    valueDice.appendChild(topDiv);
 
     let dot1 = document.createElement("div");
     dot1.classList.add("dot");
@@ -168,12 +174,11 @@ function gamingDice4() {
 
     let dot3 = document.createElement("div");
     dot3.classList.add("dot");
-    bottomDiv.appendChild(dot3);
-
+    topDiv.appendChild(dot3);
 
     let bottomDiv = document.createElement("div");
     bottomDiv.id = "bottomDots";
-    gamingDice.appendChild(bottomDiv);
+    valueDice.appendChild(bottomDiv);
 
     let dot4 = document.createElement("div");
     dot4.classList.add("dot");
@@ -187,3 +192,5 @@ function gamingDice4() {
     dot6.classList.add("dot");
     bottomDiv.appendChild(dot6);
 }
+
+export { randomDiceNumber, diceNumber };

@@ -1,7 +1,4 @@
-import { randomDiceNumber, diceNumber } from "./main.js";
-
 const cards = [
-    document.getElementById("cornerStart"),
     document.getElementById("playerSec1"),
     document.getElementById("playerSec2"),
     document.getElementById("playerSec3"),
@@ -12,46 +9,74 @@ const cards = [
     document.getElementById("playerSec8"),
     document.getElementById("playerSec9"),
     document.getElementById("playerSec10"),    
-    document.getElementById("cornerJail"),
+    document.getElementById("playerSec11"),
+    document.getElementById("playerSec12"),
+    document.getElementById("playerSec13"),
+    document.getElementById("playerSec14"),
+    document.getElementById("playerSec15"),
+    document.getElementById("playerSec16"),
+    document.getElementById("playerSec17"),
+    document.getElementById("playerSec18"),
+    document.getElementById("playerSec19"),
+    document.getElementById("playerSec20"),
+    document.getElementById("playerSec21"),
+    document.getElementById("playerSec22"),
+    document.getElementById("playerSec23"),
+    document.getElementById("playerSec24"),
+    document.getElementById("playerSec25"),
+    document.getElementById("playerSec26"),
+    document.getElementById("playerSec27"),
+    document.getElementById("playerSec28"),
+    document.getElementById("playerSec29"),
+    document.getElementById("playerSec30"),
+    document.getElementById("playerSec31"),
+    document.getElementById("playerSec32"),
+    document.getElementById("playerSec33"),
+    document.getElementById("playerSec34"),
+    document.getElementById("playerSec35"),
+    document.getElementById("playerSec36"),
+    document.getElementById("playerSec37"),
+    document.getElementById("playerSec38"),
+    document.getElementById("playerSec39"),
+    document.getElementById("playerSec40"),
 ];
 
-let playerPosOld = 0;
-let playerPosNew = 0;
+class Player {
+    positionNew = 0;
+    positionOld = 0;
 
-function movePlayer() {
-    if (diceNumber === 1) {
-        playerPosOld = playerPosNew;
-        playerPosNew++;
+    move(steps) {
+        this.positionOld = this.positionNew;
+        this.positionNew += steps;
+        
+        if (this.positionNew === 40) {
+        this.positionNew = 0;
+        }
+        else if (this.positionNew === 41) {
+            this.positionNew = 1;
+        }
+        else if (this.positionNew === 42) {
+            this.positionNew = 2;
+        }
+        else if (this.positionNew === 43) {
+            this.positionNew = 3;
+        }
+        else if (this.positionNew === 44) {
+            this.positionNew = 4;
+        }
+        else if (this.positionNew === 45) {
+            this.positionNew = 5;
+        }
+           
+        playerRender(this.positionNew, this.positionOld);
     }
-    else if (diceNumber === 2) {
-        playerPosOld = playerPosNew;
-        playerPosNew += 2;
-    }
-    else if (diceNumber === 3) {
-        playerPosOld = playerPosNew;
-        playerPosNew += 3;
-    }
-    else if (diceNumber === 4) {
-        playerPosOld = playerPosNew;
-        playerPosNew += 4;
-    }
-    else if (diceNumber === 5) {
-        playerPosOld = playerPosNew;
-        playerPosNew += 5;
-    }
-    else if (diceNumber === 6) {
-        playerPosOld = playerPosNew;
-        playerPosNew += 6;
-    }
-
-    return playerPos;
 }
 
-function createPlayer() {
+function playerRender(positionNew, positionOld) {
     const player = document.createElement("div");
     player.id = "player";
-    cards[playerPosNew].appendChild(player);
-    cards[playerPosOld].removeChild(player);
+    cards[positionNew].appendChild(player);
+    cards[positionOld].innerHTML = "";
 }
 
-export { movePlayer, createPlayer }
+export { Player, playerRender }

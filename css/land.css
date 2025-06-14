@@ -1,35 +1,39 @@
 #land {
    width: 1000px;
    height: 1000px;
+
    background-color: rgb(67, 67, 67);
-   /* background-image: url("../img/tris.jpg");
-   background-size: cover;   */
+   border-radius: 20px;
+
    display: flex;
    flex-direction: column;
-   border-radius: 20px;
 }
 
 #top {
     width: 100%;
     height: 140px;
+
     display: flex;
 }
 
 #midle {
     width: 100%;
     height: 720px;
+
     display: flex;
 }
 
 #bottom {
     width: 100%;
     height: 140px;
+
     display: flex;
 }
 
 #leftSide {
     width: 140px;
     height: 720px;
+
     display: flex;
     flex-direction: column;
 }
@@ -37,6 +41,7 @@
 #rightSide {
     width: 140px;
     height: 720px;
+
     display: flex;
     flex-direction: column;
 }
@@ -44,6 +49,7 @@
 .contentCards {
     width: 720px;
     height: 140px;
+
     display: flex;
 }
 
@@ -51,19 +57,23 @@
 .cornerBlocks {
     width: 140px;
     height: 140px;
+
+    color: #fff;
     background-color: #ffffff;
+    font-size: 25px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
-    color: #fff;
 }
 
 .cornerContent {
     width: 95%;
     height: 95%;
+
     background-color: #262626;
     border-radius: 5px 5px 18px 5px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,6 +115,7 @@
 #midleMain {
     width: 720px;
     height: 720px;
+
     display: flex;
 }
 
@@ -116,6 +127,7 @@
 #centralPart {
     width: calc(100%/3);
     height: 100%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,6 +138,7 @@
 #rightPart {
     width: calc(100%/3);
     height: 100%;
+
     display: flex;
     flex-direction: column-reverse;
 }
@@ -133,10 +146,11 @@
 #randomBtn {
     width: 100px;
     height: 40px;
+
+    color: #fff;
+    background-color: #262626;    
     border: 0;
     border-radius: 10px;
-    background-color: #262626;
-    color: #fff;
 }
 
 #randomBtn:hover {
@@ -146,12 +160,14 @@
 .card {
     width: 170px;
     height: 250px;
+
     background-color: #262626;
     border-radius: 10px;
 }
 
 #leftCard {
     rotate: 45deg;
+
     position: relative;
     left: 70px;
     top: 30px;
@@ -159,6 +175,7 @@
 
 #rightCard {
     rotate: 45deg;
+
     position: relative;
     bottom: 30px;
 }

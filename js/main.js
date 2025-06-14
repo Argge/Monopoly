@@ -1,9 +1,26 @@
-import { movePlayer, createPlayer } from "./player.js";
+import { Player, playerRender } from "./player.js";
 
 const randomBtn = document.getElementById("randomBtn");
 const gamingDice = document.getElementById("gamingDice");
 
+// const cards = [
+//     document.getElementById("cornerStart"),
+//     document.getElementById("playerSec1"),
+//     document.getElementById("playerSec2"),
+//     document.getElementById("playerSec3"),
+//     document.getElementById("playerSec4"),
+//     document.getElementById("playerSec5"),
+//     document.getElementById("playerSec6"),
+//     document.getElementById("playerSec7"),
+//     document.getElementById("playerSec8"),
+//     document.getElementById("playerSec9"),
+//     document.getElementById("playerSec10"),    
+//     document.getElementById("cornerJail"),
+// ];
+
 let diceNumber = 0;
+let player1 = new Player;
+let playerPos = 0;
 
 randomBtn.addEventListener("click", () => {
     diceNumber = randomDiceNumber();
@@ -28,10 +45,30 @@ randomBtn.addEventListener("click", () => {
         gamingDice6();
     }
 
-    console.log(diceNumber);
+    playerPos += diceNumber;
+    if (playerPos === 41) {
+        playerPos = 0;
+    }
+    else if (playerPos === 42) {
+        playerPos = 1;
+    }
+    else if (playerPos === 43) {
+        playerPos = 2;
+    }
+    else if (playerPos === 44) {
+        playerPos = 3;
+    }
+    else if (playerPos === 45) {
+        playerPos = 4;
+    }
+    else if (playerPos === 46) {
+        playerPos = 5;
+    }
 
-    movePlayer;
-    createPlayer;
+    console.log("Dice number: " + diceNumber);
+    console.log("Player position: " + playerPos);
+
+    player1.move(diceNumber);
 });
 
 function randomDiceNumber() {

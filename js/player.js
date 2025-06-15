@@ -44,6 +44,8 @@ const cards = [
 class Player {
     positionNew = 0;
     positionOld = 0;
+    lapsNew = 0;
+    lapsOld = 0;
 
     move(steps) {
         this.positionOld = this.positionNew;
@@ -67,6 +69,10 @@ class Player {
         else if (this.positionNew === 45) {
             this.positionNew = 5;
         }
+
+        if (this.positionNew > 40) {
+            this.laps++;
+        }
            
         playerRender(this.positionNew, this.positionOld);
     }
@@ -79,4 +85,4 @@ function playerRender(positionNew, positionOld) {
     cards[positionOld].innerHTML = "";
 }
 
-export { Player, playerRender }
+export { Player }

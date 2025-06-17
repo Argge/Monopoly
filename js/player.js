@@ -46,11 +46,22 @@ class Player {
     positionOld = 0;
     lapsNew = 0;
     lapsOld = 0;
+    bank = 1000;
 
     move(steps) {
         this.positionOld = this.positionNew;
         this.positionNew += steps;
         
+        if (this.positionNew >= 40) {
+            this.lapsOld = this.lapsNew;
+            this.lapsNew++;
+            setTimeout( () => {
+                if (this.lapsNew !== this.lapsOld) {
+                    this.lapsOld++;
+                }
+            }, 1 );
+        }
+
         if (this.positionNew === 40) {
         this.positionNew = 0;
         }
@@ -68,10 +79,6 @@ class Player {
         }
         else if (this.positionNew === 45) {
             this.positionNew = 5;
-        }
-
-        if (this.positionNew > 40) {
-            this.laps++;
         }
            
         playerRender(this.positionNew, this.positionOld);

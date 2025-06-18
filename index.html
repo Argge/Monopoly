@@ -9,9 +9,14 @@
     <link rel="stylesheet" href="css/dice.css">
     <link rel="stylesheet" href="css/cardsDesign.css">
     <link rel="stylesheet" href="css/player.css">
+    <link rel="stylesheet" href="css/gui.css">
 </head>
 <body>
     <main>
+        <div id="gui">
+            <span id="playerBankCounter">BALANCE: 1000$</span>
+            <button id="cardsCheckBtn">CHECK CARDS</button>
+        </div>
         <div id="land">
             <div id="top">
                 <div class="cornerBlocks" id="vacationBlock">
@@ -339,7 +344,7 @@
                                 </div>
                             </div>
                         </div>
-                    <button id="randomBtn">Dice</button>
+                    <button id="randomBtn">GO</button>
                     </div>
                     <div id="rightPart">
                         <div class="card"  id="rightCard"></div>
@@ -630,4 +635,5 @@
 <script type="module" src="js/main.js"></script>
 <script type="module" src="js/player.js"></script>
 <script type="module" src="js/dice.js"></script>
+<script type="module" src="js/cardsInfoBtn.js"></script>
 </html>

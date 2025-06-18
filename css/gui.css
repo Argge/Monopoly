@@ -1,0 +1,52 @@
+#gui {
+    color: #fff;
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    left: 20px;
+    bottom: 20px;
+    z-index: 1;
+}
+
+#playerBankCounter {
+    font-size: 30px;
+}
+
+#cardsCheckBtn {
+    width: 100%;
+    height: 50px;
+
+    font-size: 20px;
+    color: #fff;
+    background-color: #727272;
+    border: 0;
+    border-radius: 10px;
+}
+
+#cardsCheckBtn:hover {
+    background-color: #8a8a8a;
+}
+
+#cardInfoBtn {
+    width: 80px;
+    height: 30px;
+
+    color: #fff;
+    background-color: #727272;
+
+    position: absolute;
+}
+
+#cardInfoCheck:hover {
+    background-color: #8a8a8a;
+}
+
+/* #playerSec2 {
+    width: 80px;
+    height: 140px;
+} */

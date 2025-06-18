@@ -424,6 +424,9 @@
 }
 
 .playerCardSec {
+    /* width: 80px;
+    height: 140px;
+     */
     position: absolute;
     z-index: 2;
 }

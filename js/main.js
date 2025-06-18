@@ -2,6 +2,7 @@ import { Player } from "./player.js";
 import { Dice } from "./dice.js";
 
 const randomBtn = document.getElementById("randomBtn");
+const cardsCheckBtn = document.getElementById("cardsCheckBtn");
 
 let dice = new Dice;
 let player1 = new Player;
@@ -33,21 +34,26 @@ randomBtn.addEventListener("click", () => {
         playerPos = 6;
     }
 
-    console.log("Dice number: " + diceNumber);
-    console.log("Player position: " + playerPos);
-
     player1.move(diceNumber);
 
     if (player1.lapsNew !== player1.lapsOld) {
+        let playerBankCounter = document.getElementById("playerBankCounter")
+
         player1.bank += 1000;
+        playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
         console.log(player1.lapsNew);
         console.log("Player 1: +1000$");
     }
 
     if (player1.positionNew === 30) {
-        
-        player1.move();
+        player1.move(10);
+        player1.move(10);
+        playerPos = 10;
+        console.log("Player has been moved to Jail")
     }
+
+    console.log("Dice number: " + diceNumber);
+    console.log("Player position: " + playerPos);
     
 });
 

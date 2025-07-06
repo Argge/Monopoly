@@ -1,4 +1,7 @@
 #gui {
+    width: 100%;
+    height: 100%;
+
     color: #fff;
 
     position: absolute;
@@ -7,10 +10,28 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    /* user-select: none;
+    pointer-events: none; */
 
-    left: 20px;
-    bottom: 20px;
+    left: 0;
     z-index: 1;
+}
+
+#leftGui {
+    width: 350px;
+    height: 100vh;
+
+    background-color: #3e3e3e;
+    
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+
+    left: 0;
 }
 
 #playerBankCounter {
@@ -18,7 +39,7 @@
 }
 
 #cardsCheckBtn {
-    width: 100%;
+    width: 90%;
     height: 50px;
 
     font-size: 20px;
@@ -46,7 +67,33 @@
     background-color: #8a8a8a;
 }
 
-/* #playerSec2 {
-    width: 80px;
-    height: 140px;
-} */
+#settingsBtn {
+    width: 70px;
+    height: 70px;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    /* background-image: url(../img/icons/settings.svg);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat; */
+    background-color: transparent;
+
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+#settingsBtn img {
+    width: 80%;
+    height: 80%;
+}
+
+#settings img:hover {
+    animation: gear-anim, 2s, ease-in-out;
+    
+}
+
+#settingsBtn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}

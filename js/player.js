@@ -47,6 +47,7 @@ class Player {
     lapsNew = 0;
     lapsOld = 0;
     bank = 1000;
+    cards = [];
 
     move(steps) {
         this.positionOld = this.positionNew;

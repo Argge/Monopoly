@@ -1,0 +1,70 @@
+/* * {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+
+    background-color: #585858;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+#settingsMenu {
+    width: 300px;
+
+    padding: 20px 0 20px 0;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    border: solid 2px rgba(255, 255, 255, .5);
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#monopolyLogo {
+    width: 150px;
+    object-fit: cover;
+}
+
+.setBtn {
+    width: 200px;
+    height: 50px;
+
+    background-color: rgba(255, 255, 255, .3);
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+}
+
+.setBtn:hover {
+    background-color: rgba(255, 255, 255, .5);
+    border: 2px solid rgba(255, 255, 255, .7);
+}
+
+/* #returnToMenuBtn {
+    width: 200px;
+    height: 50px;
+
+    background-color: rgba(255, 255, 255, .3);
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+}
+
+#returnToMenuBtn:hover {
+    background-color: rgba(255, 255, 255, .5);
+    border: 2px solid rgba(255, 255, 255, .7);
+} */

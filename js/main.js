@@ -1,8 +1,10 @@
 import { Player } from "./player.js";
 import { Dice } from "./dice.js";
+import { settingsWinCreate, settingsWinDelete } from "./settingsBtn.js";
 
 const randomBtn = document.getElementById("randomBtn");
 const cardsCheckBtn = document.getElementById("cardsCheckBtn");
+const settingsBtn = document.getElementById("settingsBtn");
 
 let dice = new Dice;
 let player1 = new Player;
@@ -55,6 +57,18 @@ randomBtn.addEventListener("click", () => {
     console.log("Dice number: " + diceNumber);
     console.log("Player position: " + playerPos);
     
+});
+
+let openClose = false;
+settingsBtn.addEventListener("click", () => {
+    if (openClose === false) {
+        openClose = true;
+        settingsWinCreate();
+    }
+    else {
+        openClose = false;
+        settingsWinDelete();
+    }
 });
 
 function randomDiceNumber() {

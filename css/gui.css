@@ -85,6 +85,15 @@
     top: 20px;
 }
 
+#settingsLogo {
+    transition: 1s;
+}
+
+#settingsLogo:hover {
+    scale: 105%;
+    rotate: 360deg;
+}
+
 #settingsBtn img {
     width: 80%;
     height: 80%;
@@ -97,4 +106,30 @@
 
 #settingsBtn:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.playerPosUI {
+    width: 300px;
+    height: 50px;
+
+    /* padding: 0 10px 0 10px; */
+    background-color: #8a8a8a;
+    border-radius: 10px;
+
+    display: flex;
+    /* justify-content: space-between;   */
+    align-items: center;
+    gap: 8px;
+}
+
+.playerPlaceNum {
+    margin-left: 15px;
+}
+
+.userLogo {
+    width: 40px;
+
+    object-fit: cover;
+    background-position: center;
+    background-size: cover;
 }

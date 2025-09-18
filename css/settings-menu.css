@@ -30,6 +30,11 @@
     cursor: pointer;
     color: #fff;
     font-size: 17px;
+    text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .setBtn:hover {

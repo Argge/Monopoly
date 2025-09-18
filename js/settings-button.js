@@ -1,4 +1,3 @@
-
 const gui = document.getElementById("gui");
 let randomBtn = document.getElementById("randomBtn");
 
@@ -7,6 +6,11 @@ settingsBtn.addEventListener("click", () => {
     if (openClose === false) {
         openClose = true;
         settingsWinCreate();
+        const continueBtn = document.getElementById("continueBtn");
+        continueBtn.addEventListener("click", () => {
+            openClose = false;
+            settingsWinDelete();
+        });
     }
     else {
         openClose = false;
@@ -31,10 +35,11 @@ function settingsWinCreate() {
     continueBtn.textContent = "CONTINUE";
     mainWin.appendChild(continueBtn);
 
-    let returnBtn = document.createElement("button");
+    let returnBtn = document.createElement("a");
     returnBtn.id = "returnToMenuBtn";
     returnBtn.classList.add("setBtn");
     returnBtn.textContent = "BACK TO MENU";
+    returnBtn.href = "index.html";
     mainWin.appendChild(returnBtn);
 
     randomBtn.style.zIndex = "0";

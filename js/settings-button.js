@@ -2,21 +2,22 @@
 const gui = document.getElementById("gui");
 let randomBtn = document.getElementById("randomBtn");
 
-// let openClose = false;
-// settingsBtn.addEventListener("click", () => {
-//     if (openClose === false) {
-//         openClose = true;
-//         settingsWinCreate();
-//     }
-//     else {
-//         openClose = false;
-//         settingsWinDelete();
-//     }
-// });
+let openClose = false;
+settingsBtn.addEventListener("click", () => {
+    if (openClose === false) {
+        openClose = true;
+        settingsWinCreate();
+    }
+    else {
+        openClose = false;
+        settingsWinDelete();
+    }
+});
 
 function settingsWinCreate() {
     const mainWin = document.createElement("div"); 
     mainWin.id = "settingsMenu";
+    mainWin.classList.add("menuPattern");
     gui.appendChild(mainWin);
 
     const logoImg = document.createElement("img");
@@ -35,11 +36,14 @@ function settingsWinCreate() {
     returnBtn.classList.add("setBtn");
     returnBtn.textContent = "BACK TO MENU";
     mainWin.appendChild(returnBtn);
+
+    randomBtn.style.zIndex = "0";
 }
 
 function settingsWinDelete() {
     let mainWin = document.getElementById("settingsMenu");
     gui.removeChild(mainWin);
+    randomBtn.style.zIndex = "3";
 }
 
 export { settingsWinCreate, settingsWinDelete };

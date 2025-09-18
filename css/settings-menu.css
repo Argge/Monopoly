@@ -1,23 +1,8 @@
-/* * {
-    padding: 0;
-    margin: 0;
-}
-
-body {
-    width: 100%;
-    height: 100vh;
-
-    background-color: #585858;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-#settingsMenu {
+.menuPattern {
     width: 300px;
 
     padding: 20px 0 20px 0;
+    background-color: rgba(0, 0, 0, .2);
     backdrop-filter: blur(5px);
     border-radius: 15px;
     border: solid 2px rgba(255, 255, 255, .5);
@@ -52,19 +37,8 @@ body {
     border: 2px solid rgba(255, 255, 255, .7);
 }
 
-/* #returnToMenuBtn {
-    width: 200px;
-    height: 50px;
-
-    background-color: rgba(255, 255, 255, .3);
-    border: 2px solid rgba(255, 255, 255, .5);
-    border-radius: 10px;
-    cursor: pointer;
+.authorText {
     color: #fff;
-    font-size: 17px;
+    font-size: 15px;
+    user-select: none;
 }
-
-#returnToMenuBtn:hover {
-    background-color: rgba(255, 255, 255, .5);
-    border: 2px solid rgba(255, 255, 255, .7);
-} */

@@ -1,4 +1,4 @@
-import { player1 } from "./main";
+import { player1 } from "./main.js";
 
 const cards = [
     document.getElementById("playerSec2"),
@@ -49,11 +49,11 @@ class CardInfo {
 
 
     first() {
-        cardInfoRender(this.owner, this.baseRent, this.level, this.price, this.upgradePrice);
+        cardInfoRender(this.owner, this.baseRent, this.level, this.price, this.upgradePrice, this.name);
     }
 }
 
-function cardInfoRender(owner, baseRent, level, price, upgradePrice) {
+function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
     const gui = document.getElementById("gui");
 
     // HEADER
@@ -85,6 +85,7 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice) {
     else {
         ownerText.textContent = "OWNER: " + owner;
     }
+    ownerText.id = name;
     infoText.appendChild(ownerText);
 
     let baseRentText = document.createElement("span");
@@ -130,7 +131,7 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice) {
     levelsBG.appendChild(levelDiv3);
 
     // BUTTON
-    const mainBtn = document.createElement("button");
+    let mainBtn = document.createElement("button");
     mainBtn.id = "cardUpgradeBtn";
     cardBG.appendChild(mainBtn);
 
@@ -149,14 +150,15 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice) {
     mainBtn.appendChild(vignette);
 }
 
-function cardBuying(cardNamePush) {
+function cardBuying(cardNamePush, cardName) {
     
     let buyBtn = document.getElementById("cardUpgradeBtn");
 
     buyBtn.addEventListener("click", () => {
+        // WARN
         if (player1.bank < 3000) {
 
-            const mainWin = document.createElement("div"); 
+            const mainWin = document.createElement("div");
             mainWin.id = "settingsMenu";
             mainWin.classList.add("menuPattern");
             gui.appendChild(mainWin);
@@ -168,10 +170,24 @@ function cardBuying(cardNamePush) {
 
             randomBtn.style.zIndex = "0";
 
+            setTimeout( () => {
+                gui.removeChild(mainWin);
+                randomBtn.style.zIndex = "2";    
+            }, 2500);
         }
+        // BUYING
         else {
             player1.bank -= 3000;
-            player1.cards.push(cardNamePush); 
+            player1.cards.push(cardNamePush);
+            playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+            let btnText = document.getElementById("cardBtnText");
+            let ownerText = document.getElementById(cardName.name);
+            btnText.textContent = "UPGRADE";
+            cardName.owner = "Player";
+            ownerText.textContent = "OWNER: Player";
+
+            console.log("Player buyed card: " + cardNamePush);
         }
     });
 
@@ -190,7 +206,7 @@ cards[0].addEventListener("click", () => {
         cardCocaCola.name = "CocaCola";
         cardCocaCola.first();
 
-        // cardBuying("CocaCola");
+        cardBuying("CocaCola", cardCocaCola);
     }
     else {
         cardInfoSwitch = false;
@@ -205,6 +221,8 @@ cards[2].addEventListener("click", () => {
         cardInfoSwitch = true;
         cardNestle.name = "Nestle";
         cardNestle.first();
+
+        cardBuying("Nestle", cardNestle);
     }
     else {
         cardInfoSwitch = false;

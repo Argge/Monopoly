@@ -15,8 +15,6 @@ randomBtn.addEventListener("click", () => {
     gamingDice.innerHTML = "";
     dice.createDice(diceNumber);
 
-    console.log(player1);
-
     playerPos += diceNumber;
     if (playerPos === 41) {
         playerPos = 1;
@@ -56,8 +54,8 @@ randomBtn.addEventListener("click", () => {
     }
 
     console.log("Dice number: " + diceNumber);
-    console.log("Player position: " + playerPos);
-    
+    console.log("Player position: " + playerPos);   
+    console.log(player1);
 });
 
 function randomDiceNumber() {
@@ -65,4 +63,4 @@ function randomDiceNumber() {
     return ranNum;
 }
 
-// export { player1 }
+export { player1 }

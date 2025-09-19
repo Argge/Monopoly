@@ -120,3 +120,7 @@
 #buttonVignette:hover {
     background: linear-gradient(to bottom, #262626,  rgba(255, 255, 255, 0.3));
 }
+
+.infoText {
+    font-size: 20px;
+}

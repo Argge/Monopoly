@@ -1,3 +1,5 @@
+import { player1 } from "./main";
+
 const cards = [
     document.getElementById("playerSec2"),
     document.getElementById("playerSec3"),
@@ -147,6 +149,36 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice) {
     mainBtn.appendChild(vignette);
 }
 
+function cardBuying(cardNamePush) {
+    
+    let buyBtn = document.getElementById("cardUpgradeBtn");
+
+    buyBtn.addEventListener("click", () => {
+        if (player1.bank < 3000) {
+
+            const mainWin = document.createElement("div"); 
+            mainWin.id = "settingsMenu";
+            mainWin.classList.add("menuPattern");
+            gui.appendChild(mainWin);
+
+            let infoText = document.createElement("p");
+            infoText.classList.add("infoText");
+            infoText.textContent = "NOT ENOUGH MONEY";
+            mainWin.appendChild(infoText);
+
+            randomBtn.style.zIndex = "0";
+
+        }
+        else {
+            player1.bank -= 3000;
+            player1.cards.push(cardNamePush); 
+        }
+    });
+
+    
+    
+}
+
 const cardCocaCola = new CardInfo;
 const cardNestle = new CardInfo;
 
@@ -157,6 +189,8 @@ cards[0].addEventListener("click", () => {
         cardInfoSwitch = true;
         cardCocaCola.name = "CocaCola";
         cardCocaCola.first();
+
+        // cardBuying("CocaCola");
     }
     else {
         cardInfoSwitch = false;

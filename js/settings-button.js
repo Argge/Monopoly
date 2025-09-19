@@ -35,12 +35,23 @@ function settingsWinCreate() {
     continueBtn.textContent = "CONTINUE";
     mainWin.appendChild(continueBtn);
 
+    let rullesBtn = document.createElement("button");
+    rullesBtn.id = "rullesBtn";
+    rullesBtn.classList.add("setBtn");
+    rullesBtn.textContent = "RULLLES";
+    mainWin.appendChild(rullesBtn);
+
     let returnBtn = document.createElement("a");
     returnBtn.id = "returnToMenuBtn";
     returnBtn.classList.add("setBtn");
     returnBtn.textContent = "BACK TO MENU";
     returnBtn.href = "index.html";
     mainWin.appendChild(returnBtn);
+
+    let authorText = document.createElement("p");
+    authorText.classList.add("authorText");
+    authorText.textContent = "GAME CREATED BY ARGGE";
+    mainWin.appendChild(authorText);
 
     randomBtn.style.zIndex = "0";
 }

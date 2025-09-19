@@ -439,3 +439,12 @@
 .playerCardSec:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+
+
+
+/* PLAYER SECTIONS CONFIGURE */
+
+#playerSec12, #playerSec13, #playerSec14, #playerSec15, #playerSec16, #playerSec17, #playerSec18, #playerSec19, #playerSec20, #playerSec32, #playerSec33, #playerSec34, #playerSec35, #playerSec36, #playerSec37, #playerSec38, #playerSec39, #playerSec40 {
+    width: 140px;
+    height: 80px;
+}

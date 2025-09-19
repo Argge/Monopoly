@@ -112,12 +112,14 @@
     width: 300px;
     height: 50px;
 
-    /* padding: 0 10px 0 10px; */
+
+    margin-top: 20px;
     background-color: #8a8a8a;
     border-radius: 10px;
 
+    position: absolute;
+    top: 0;
     display: flex;
-    /* justify-content: space-between;   */
     align-items: center;
     gap: 8px;
 }
@@ -132,4 +134,9 @@
     object-fit: cover;
     background-position: center;
     background-size: cover;
+}
+
+.balanceCounter {
+    margin-left: 10px;
+    font-size: 20px;
 }

@@ -3,6 +3,7 @@ import { Dice } from "./dice.js";
 
 const randomBtn = document.getElementById("randomBtn");
 const cardsCheckBtn = document.getElementById("cardsCheckBtn");
+const settingsBtn = document.getElementById("settingsBtn");
 
 let dice = new Dice;
 let player1 = new Player;

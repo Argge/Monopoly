@@ -1,0 +1,49 @@
+.menuPattern {
+    width: 300px;
+
+    padding: 20px 0 20px 0;
+    background-color: rgba(0, 0, 0, .2);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    border: solid 2px rgba(255, 255, 255, .5);
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#monopolyLogo {
+    width: 150px;
+    object-fit: cover;
+}
+
+.setBtn {
+    width: 200px;
+    height: 50px;
+
+    background-color: rgba(255, 255, 255, .3);
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setBtn:hover {
+    background-color: rgba(255, 255, 255, .5);
+    border: 2px solid rgba(255, 255, 255, .7);
+}
+
+.authorText {
+    color: #fff;
+    font-size: 15px;
+    user-select: none;
+}

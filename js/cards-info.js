@@ -65,12 +65,33 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
     imgBG.id = "imageBG";
     cardBG.appendChild(imgBG);
 
+    const colorBG = document.createElement("div");
+    colorBG.classList.add("topBG");
+    cardColorBgDefine(colorBG, name);
+    imgBG.appendChild(colorBG);
+    
     const imgVignette = document.createElement("div");
     imgVignette.id = "imageVignette";
     imgBG.appendChild(imgVignette);
 
     const imgLogo = document.createElement("img");
     imgLogo.id = "cardLogo";
+    imgLogo.setAttribute("src", "");
+    if (name === "CocaCola") {
+        imgLogo.src = "img/logo/white_logos/coca-cola_logo.png";
+    }
+    else if (name === "Nestle") {
+        imgLogo.src = "img/logo/white_logos/nestle_logo.png";
+    }
+    else if (name === "Nike") {
+        imgLogo.src = "img/logo/white_logos/nike_logo.png";
+    }
+    else if (name === "Adidas") {
+        imgLogo.src = "img/logo/white_logos/adidas_logo.png";
+    }
+    else if (name === "NewBalance") {
+        imgLogo.src = "img/logo/white_logos/new-balance_logo.png";
+    }
     imgBG.appendChild(imgLogo);
 
     // TEXT BLOCK
@@ -135,6 +156,11 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
     mainBtn.id = "cardUpgradeBtn";
     cardBG.appendChild(mainBtn);
 
+    let btnBG = document.createElement("div");
+    btnBG.classList.add("bottomBG");
+    cardColorBgDefine(btnBG, name);
+    mainBtn.appendChild(btnBG);
+
     let textBtn = document.createElement("span");
     if (owner === null) {
         textBtn.textContent = "BUY";
@@ -148,6 +174,33 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
     const vignette = document.createElement("div");
     vignette.id = "buttonVignette";
     mainBtn.appendChild(vignette);
+}
+
+function cardColorBgDefine(obj, name) {
+    if (name === "CocaCola" || name === "Nestle") {
+        obj.classList.add("colorBG1");
+    }
+    else if (name === "Nike" || name === "Adidas" || name === "NewBalance") {
+        obj.classList.add("colorBG2");
+    }
+    else if (name === "Instagram" || name === "TikTok" || name === "YouTube") {
+        obj.classList.add("colorBG3");
+    }
+    else if (name === "BurgerKing" || name === "KFC" || name === "McDonalds") {
+        obj.classList.add("colorBG4");
+    }
+    else if (name === "Oracle" || name === "Amazone" || name === "Microsoft") {
+        obj.classList.add("colorBG5");
+    }
+    else if (name === "Mercedes" || name === "Audi" || name === "Toyota") {
+        obj.classList.add("colorBG6");
+    }
+    else if (name === "Samsung" || name === "Apple" || name === "Google") {
+        obj.classList.add("colorBG7");
+    }
+    else {
+        obj.classList.add("colorBG8");
+    }
 }
 
 function cardBuying(cardNamePush, cardName) {
@@ -190,44 +243,78 @@ function cardBuying(cardNamePush, cardName) {
             console.log("Player buyed card: " + cardNamePush);
         }
     });
+}
 
+let cardOpened = null;
+function cardOpen(name, cardObj) {
+    if (cardOpened) {
+        let gui = document.getElementById("gui");
+        let cardBG = document.getElementById("cardInfoBG");
+        gui.removeChild(cardBG);
+    }
     
-    
+    cardObj.name = name;
+    cardObj.first();
+    cardBuying(name, cardObj);
+
+    cardOpened = name;
+}
+
+function cardClose() {
+    let gui = document.getElementById("gui");
+    let cardBG = document.getElementById("cardInfoBG");
+    gui.removeChild(cardBG);
+
+    cardOpened = null;
 }
 
 const cardCocaCola = new CardInfo;
 const cardNestle = new CardInfo;
-
-let cardInfoSwitch = false;
+const cardNike = new CardInfo;
+const cardAdidas = new CardInfo;
+const cardNewBalance = new CardInfo;
 
 cards[0].addEventListener("click", () => {
-    if (cardInfoSwitch === false) {
-        cardInfoSwitch = true;
-        cardCocaCola.name = "CocaCola";
-        cardCocaCola.first();
-
-        cardBuying("CocaCola", cardCocaCola);
+    if (cardOpened === "CocaCola") {
+        cardClose();
     }
     else {
-        cardInfoSwitch = false;
-        let gui = document.getElementById("gui");
-        let cardBG = document.getElementById("cardInfoBG");
-        gui.removeChild(cardBG);
+        cardOpen("CocaCola", cardCocaCola);
     }
 });
 
 cards[2].addEventListener("click", () => {
-    if (cardInfoSwitch === false) {
-        cardInfoSwitch = true;
-        cardNestle.name = "Nestle";
-        cardNestle.first();
-
-        cardBuying("Nestle", cardNestle);
+    if (cardOpened === "Nestle") {
+        cardClose();
     }
     else {
-        cardInfoSwitch = false;
-        let gui = document.getElementById("gui");
-        let cardBG = document.getElementById("cardInfoBG");
-        gui.removeChild(cardBG);
+        cardOpen("Nestle", cardNestle);
+    }
+});
+
+cards[5].addEventListener("click", () => {
+    if (cardOpened === "Nike") {
+        cardClose();
+    }
+    else {
+        cardOpen("Nike", cardNike);
+    }
+});
+
+cards[7].addEventListener("click", () => {
+    if (cardOpened === "Adidas") {
+        cardClose();
+    }
+    else {
+        cardOpen("Adidas", cardNike);
+    }
+});
+
+cards[8].addEventListener("click", () => {
+    if (cardOpened === "NewBalance") {
+        cardClose();
+    }
+    else {
+        cardOpen("NewBalance", cardNike);
     }
 });

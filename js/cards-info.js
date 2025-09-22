@@ -39,21 +39,25 @@ const cards = [
     document.getElementById("playerSec40"),
 ];
 
+const gui = document.getElementById("gui");
+
 class CardInfo {
     name = null;
     owner = null;
     baseRent = null;
     level = 0;
     price = 0;
-    upgradePrice = 0;
+    upgradePrice1 = 0;
+    upgradePrice2 = 0;
+    upgradePrice3 = 0;
 
 
     first() {
-        cardInfoRender(this.owner, this.baseRent, this.level, this.price, this.upgradePrice, this.name);
+        cardInfoRender(this.owner, this.baseRent, this.level, this.price, this.upgradePrice1, this.upgradePrice2, this.upgradePrice3, this.name);
     }
 }
 
-function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
+function cardInfoRender(owner, baseRent, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
     const gui = document.getElementById("gui");
 
     // HEADER
@@ -92,6 +96,15 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
     else if (name === "NewBalance") {
         imgLogo.src = "img/logo/white_logos/new-balance_logo.png";
     }
+    else if (name === "Instagram") {
+        imgLogo.src = "img/logo/white_logos/instagram_logo.png";
+    }
+    else if (name === "TikTok") {
+        imgLogo.src = "img/logo/white_logos/tiktok_logo.png";
+    }
+    else if (name === "YouTube") {
+        imgLogo.src = "img/logo/white_logos/you-tube_logo.png";
+    }
     imgBG.appendChild(imgLogo);
 
     // TEXT BLOCK
@@ -119,15 +132,28 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
     infoText.appendChild(baseRentText);
     
     let levelText = document.createElement("span");
+    levelText.id = "levelText";
     levelText.textContent = "LEVEL: " + level;
     infoText.appendChild(levelText);
 
     let priceText = document.createElement("span");
+    priceText.id = "priceText";
     if (owner === null) {
         priceText.textContent = "PRICE: " + price;
     }
     else {
-        priceText.textContent = "FOR UPGRADE: " + upgradePrice;
+        if (level === 0) {
+            priceText.textContent = "FOR UPGRADE: " + upgradePrice1;
+        }
+        else if (level === 1) {
+            priceText.textContent = "FOR UPGRADE: " + upgradePrice2;
+        }
+        else if (level === 2) {
+            priceText.textContent = "FOR UPGRADE: " + upgradePrice3;
+        }
+        else {
+            priceText.textContent = "";
+        }
     }
     infoText.appendChild(priceText);
 
@@ -138,17 +164,33 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice, name) {
 
     let levelDiv1 = document.createElement("div");
     levelDiv1.id = "levelBlock1";
-    levelDiv1.classList.add("cardLevel0");
+    if (level === 0) {
+        levelDiv1.classList.add("cardLevel0");
+    }
+    else {
+        levelDiv1.classList.add("cardLevel1");
+    }
+    
     levelsBG.appendChild(levelDiv1);
 
     let levelDiv2 = document.createElement("div");
     levelDiv2.id = "levelBlock2";
-    levelDiv2.classList.add("cardLevel0");
+    if (level === 0 || level === 1) {
+        levelDiv2.classList.add("cardLevel0");
+    }
+    else {
+        levelDiv2.classList.add("cardLevel1");
+    }
     levelsBG.appendChild(levelDiv2);
 
     let levelDiv3 = document.createElement("div");
     levelDiv3.id = "levelBlock3";
-    levelDiv3.classList.add("cardLevel0");
+    if (level === 0 || level === 1 || level === 2) {
+        levelDiv3.classList.add("cardLevel0");
+    }
+    else {
+        levelDiv3.classList.add("cardLevel1");
+    }
     levelsBG.appendChild(levelDiv3);
 
     // BUTTON
@@ -208,47 +250,128 @@ function cardBuying(cardNamePush, cardName) {
     let buyBtn = document.getElementById("cardUpgradeBtn");
 
     buyBtn.addEventListener("click", () => {
-        // WARN
-        if (player1.bank < 3000) {
 
-            const mainWin = document.createElement("div");
-            mainWin.id = "settingsMenu";
-            mainWin.classList.add("menuPattern");
-            gui.appendChild(mainWin);
+        let levelText = document.getElementById("levelText");
+        let priceText = document.getElementById("priceText");
+        let btnText = document.getElementById("cardBtnText");
 
-            let infoText = document.createElement("p");
-            infoText.classList.add("infoText");
-            infoText.textContent = "NOT ENOUGH MONEY";
-            mainWin.appendChild(infoText);
+        // IF THE CARD HASN'T OWNER
+        if (cardName.owner === null) {
+            // WARN
+            if (player1.bank < cardName.price) {
+                warnWin();
+            }
+            // BUYING
+            else {
+                player1.bank -= cardName.price;
+                player1.cards.push(cardNamePush);
+                playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
 
-            randomBtn.style.zIndex = "0";
+                let ownerText = document.getElementById(cardName.name);
+                btnText.textContent = "UPGRADE";
+                cardName.owner = "Player";
+                ownerText.textContent = "OWNER: Player";
+                priceText.textContent = "UPGRADE PRICE: " + cardName.upgradePrice1;
 
-            setTimeout( () => {
-                gui.removeChild(mainWin);
-                randomBtn.style.zIndex = "2";    
-            }, 2500);
+                console.log("Player buyed card: " + cardNamePush);
+                console.log(player1.bank);
+            }
         }
-        // BUYING
-        else {
-            player1.bank -= 3000;
-            player1.cards.push(cardNamePush);
-            playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+        else if (cardName.owner === "Player") {
+            if (cardName.level === 0) {
+               if (player1.bank < cardName.upgradePrice1) {
+                    warnWin();
+                }
+                else {
+                    player1.bank -= cardName.upgradePrice1;
+                    playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
 
-            let btnText = document.getElementById("cardBtnText");
-            let ownerText = document.getElementById(cardName.name);
-            btnText.textContent = "UPGRADE";
-            cardName.owner = "Player";
-            ownerText.textContent = "OWNER: Player";
+                    cardName.level = 1;
+                    levelText.textContent = "LEVEL: 1";
 
-            console.log("Player buyed card: " + cardNamePush);
+                    priceText.textContent = "UPGRADE PRICE: " + cardName.upgradePrice2;
+
+                    let levelBlock = document.getElementById("levelBlock1");
+                    levelBlock.classList.add("cardLevel1");
+
+                    console.log("Player upgraded card: " + cardNamePush + " to 1LVL!");
+                    console.log(player1.bank);
+                } 
+            }
+            else if (cardName.level === 1) {
+                if (player1.bank < cardName.upgradePrice2) {
+                    warnWin();
+                }
+                else {
+                    player1.bank -= cardName.upgradePrice2;
+                    playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+                    cardName.level = 2;
+                    levelText.textContent = "LEVEL: 2";
+
+                    priceText.textContent = "UPGRADE PRICE: " + cardName.upgradePrice3;
+
+                    let levelBlock = document.getElementById("levelBlock2");
+                    levelBlock.classList.add("cardLevel1");
+
+                    console.log("Player upgraded card: " + cardNamePush + " to 2LVL!");
+                    console.log(player1.bank);
+                }
+            }
+            else if (cardName.level === 2) {
+                if (player1.bank < cardName.upgradePrice3) {
+                    warnWin();
+                }
+                else {
+                    player1.bank -= cardName.upgradePrice3;
+                    playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+                    cardName.level = 3;
+                    levelText.textContent = "LEVEL: 3";
+
+                    priceText.textContent = "";
+
+                    let levelBlock = document.getElementById("levelBlock3");
+                    levelBlock.classList.add("cardLevel1");
+
+                    btnText.textContent = "MAX";
+                    cardUpgradeBtn.disabled = true;
+                    
+
+                    console.log("Player upgraded card: " + cardNamePush + " to 3LVL!");
+                    console.log(player1.bank);
+                }
+            }
         }
     });
 }
 
+function warnWin() {
+    const mainWin = document.createElement("div");
+    mainWin.id = "settingsMenu";
+    mainWin.classList.add("menuPattern");
+    gui.appendChild(mainWin);
+
+    let infoText = document.createElement("p");
+    infoText.classList.add("infoText");
+    infoText.textContent = "NOT ENOUGH MONEY";
+    mainWin.appendChild(infoText);
+
+    randomBtn.style.zIndex = "0";
+
+    setTimeout( () => {
+        gui.removeChild(mainWin);
+        if (cardOpened === null) {
+        randomBtn.style.zIndex = "2";   
+        }
+         
+    }, 2500);
+}
+
 let cardOpened = null;
 function cardOpen(name, cardObj) {
+    let gui = document.getElementById("gui");
     if (cardOpened) {
-        let gui = document.getElementById("gui");
         let cardBG = document.getElementById("cardInfoBG");
         gui.removeChild(cardBG);
     }
@@ -256,6 +379,8 @@ function cardOpen(name, cardObj) {
     cardObj.name = name;
     cardObj.first();
     cardBuying(name, cardObj);
+    gui.style.backdropFilter = "blur(3px)";
+    randomBtn.style.zIndex = "0";
 
     cardOpened = name;
 }
@@ -263,6 +388,8 @@ function cardOpen(name, cardObj) {
 function cardClose() {
     let gui = document.getElementById("gui");
     let cardBG = document.getElementById("cardInfoBG");
+    gui.style.backdropFilter = "";
+    randomBtn.style.zIndex = "2";
     gui.removeChild(cardBG);
 
     cardOpened = null;
@@ -274,7 +401,15 @@ const cardNike = new CardInfo;
 const cardAdidas = new CardInfo;
 const cardNewBalance = new CardInfo;
 
+// gui.addEventListener("click", () => {
+//     cardClose();
+// });
+
 cards[0].addEventListener("click", () => {
+    cardCocaCola.price = 30;
+    cardCocaCola.upgradePrice1 = 70;
+    cardCocaCola.upgradePrice2 = 85;
+    cardCocaCola.upgradePrice3 = 100;
     if (cardOpened === "CocaCola") {
         cardClose();
     }
@@ -306,7 +441,7 @@ cards[7].addEventListener("click", () => {
         cardClose();
     }
     else {
-        cardOpen("Adidas", cardNike);
+        cardOpen("Adidas", cardAdidas);
     }
 });
 
@@ -315,6 +450,6 @@ cards[8].addEventListener("click", () => {
         cardClose();
     }
     else {
-        cardOpen("NewBalance", cardNike);
+        cardOpen("NewBalance", cardNewBalance);
     }
 });

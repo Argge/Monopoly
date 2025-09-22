@@ -74,10 +74,6 @@
 
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 10px;
-    /* background-image: url(../img/icons/settings.svg);
-    background-size: 80%;
-    background-position: center;
-    background-repeat: no-repeat; */
     background-color: transparent;
 
     position: absolute;
@@ -86,12 +82,12 @@
 }
 
 #settingsLogo {
-    transition: 1s;
+    transition: 0.5s;
 }
 
 #settingsLogo:hover {
     scale: 105%;
-    rotate: 360deg;
+    rotate: 90deg;
 }
 
 #settingsBtn img {

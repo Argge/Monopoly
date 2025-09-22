@@ -1,4 +1,5 @@
 import { player1 } from "./main.js";
+import { cardCocaCola, cardNestle, cardNike, cardAdidas, cardNewBalance } from "./cards-values.js";
 
 const cards = [
     document.getElementById("playerSec2"),
@@ -38,24 +39,6 @@ const cards = [
     document.getElementById("playerSec39"),
     document.getElementById("playerSec40"),
 ];
-
-const gui = document.getElementById("gui");
-
-class CardInfo {
-    name = null;
-    owner = null;
-    baseRent = null;
-    level = 0;
-    price = 0;
-    upgradePrice1 = 0;
-    upgradePrice2 = 0;
-    upgradePrice3 = 0;
-
-
-    first() {
-        cardInfoRender(this.owner, this.baseRent, this.level, this.price, this.upgradePrice1, this.upgradePrice2, this.upgradePrice3, this.name);
-    }
-}
 
 function cardInfoRender(owner, baseRent, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
     const gui = document.getElementById("gui");
@@ -139,17 +122,17 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice1, upgradePri
     let priceText = document.createElement("span");
     priceText.id = "priceText";
     if (owner === null) {
-        priceText.textContent = "PRICE: " + price;
+        priceText.textContent = "PRICE: " + price + "$";
     }
     else {
         if (level === 0) {
-            priceText.textContent = "FOR UPGRADE: " + upgradePrice1;
+            priceText.textContent = "FOR UPGRADE: " + upgradePrice1 + "$";
         }
         else if (level === 1) {
-            priceText.textContent = "FOR UPGRADE: " + upgradePrice2;
+            priceText.textContent = "FOR UPGRADE: " + upgradePrice2 + "$";
         }
         else if (level === 2) {
-            priceText.textContent = "FOR UPGRADE: " + upgradePrice3;
+            priceText.textContent = "FOR UPGRADE: " + upgradePrice3 + "$";
         }
         else {
             priceText.textContent = "";
@@ -207,8 +190,11 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice1, upgradePri
     if (owner === null) {
         textBtn.textContent = "BUY";
     }
-    else {
+    else if (level === 0 || level === 1 || level === 2) {
         textBtn.textContent = "UPGRADE";
+    }
+    else {
+        textBtn.textContent = "MAX";
     }
     textBtn.id = "cardBtnText"; 
     mainBtn.appendChild(textBtn);
@@ -395,21 +381,11 @@ function cardClose() {
     cardOpened = null;
 }
 
-const cardCocaCola = new CardInfo;
-const cardNestle = new CardInfo;
-const cardNike = new CardInfo;
-const cardAdidas = new CardInfo;
-const cardNewBalance = new CardInfo;
-
 // gui.addEventListener("click", () => {
 //     cardClose();
 // });
 
 cards[0].addEventListener("click", () => {
-    cardCocaCola.price = 30;
-    cardCocaCola.upgradePrice1 = 70;
-    cardCocaCola.upgradePrice2 = 85;
-    cardCocaCola.upgradePrice3 = 100;
     if (cardOpened === "CocaCola") {
         cardClose();
     }
@@ -453,3 +429,5 @@ cards[8].addEventListener("click", () => {
         cardOpen("NewBalance", cardNewBalance);
     }
 });
+
+export { cardInfoRender }

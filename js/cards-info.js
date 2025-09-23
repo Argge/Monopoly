@@ -1,5 +1,5 @@
 import { player1 } from "./main.js";
-import { cardCocaCola, cardNestle, cardNike, cardAdidas, cardNewBalance } from "./cards-values.js";
+import { cardCocaCola, cardNestle, cardNike, cardAdidas, cardNewBalance, cardInstagram, cardTikTok, cardYouTube, cardBurgerKing, cardKfc, cardMcDonalds } from "./cards-values.js";
 
 const cards = [
     document.getElementById("playerSec2"),
@@ -40,7 +40,7 @@ const cards = [
     document.getElementById("playerSec40"),
 ];
 
-function cardInfoRender(owner, baseRent, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
+function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
     const gui = document.getElementById("gui");
 
     // HEADER
@@ -83,13 +83,22 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice1, upgradePri
         imgLogo.src = "img/logo/white_logos/instagram_logo.png";
     }
     else if (name === "TikTok") {
-        imgLogo.src = "img/logo/white_logos/tiktok_logo.png";
+        imgLogo.src = "img/logo/tik_tok_logo.png";
     }
     else if (name === "YouTube") {
         imgLogo.src = "img/logo/white_logos/you-tube_logo.png";
     }
+    else if (name === "BurgerKing") {
+        imgLogo.src = "img/logo/burger_king_logo.png";
+    }
+    else if (name === "Kfc") {
+        imgLogo.src = "img/logo/kfc_logo.png";
+    }
+    else if (name === "McDonalds") {
+        imgLogo.src = "img/logo/mcdonalds_logo.webp";
+    }
     imgBG.appendChild(imgLogo);
-
+    
     // TEXT BLOCK
     const infoText = document.createElement("div");
     infoText.id = "infoTextCard";
@@ -106,11 +115,21 @@ function cardInfoRender(owner, baseRent, level, price, upgradePrice1, upgradePri
     infoText.appendChild(ownerText);
 
     let baseRentText = document.createElement("span");
-    if (baseRent === null) {
-        baseRentText.textContent = "BASE RENT: NONE";
+    baseRentText.id = "baseRentText";
+    if (owner === null) {
+        baseRentText.textContent = "BASE RENT: 0";
     }
-    else {
-        baseRentText.textContent = "BASE RENT: " + baseRent;    
+    else if (owner !== null || level === 0) {
+        baseRentText.textContent = "BASE RENT: " + baseRent0;    
+    }
+    else if (owner !== null || level === 1) {
+        baseRentText.textContent = "BASE RENT: " + baseRent1;    
+    }
+    else if (owner !== null || level === 2) {
+        baseRentText.textContent = "BASE RENT: " + baseRent2;    
+    }
+    else if (owner !== null || level === 3) {
+        baseRentText.textContent = "BASE RENT: " + baseRent3;    
     }
     infoText.appendChild(baseRentText);
     
@@ -214,7 +233,7 @@ function cardColorBgDefine(obj, name) {
     else if (name === "Instagram" || name === "TikTok" || name === "YouTube") {
         obj.classList.add("colorBG3");
     }
-    else if (name === "BurgerKing" || name === "KFC" || name === "McDonalds") {
+    else if (name === "BurgerKing" || name === "Kfc" || name === "McDonalds") {
         obj.classList.add("colorBG4");
     }
     else if (name === "Oracle" || name === "Amazone" || name === "Microsoft") {
@@ -258,6 +277,7 @@ function cardBuying(cardNamePush, cardName) {
                 cardName.owner = "Player";
                 ownerText.textContent = "OWNER: Player";
                 priceText.textContent = "UPGRADE PRICE: " + cardName.upgradePrice1;
+                baseRentText.textContent = "BASE RENT: " + cardName.baseRent0;
 
                 console.log("Player buyed card: " + cardNamePush);
                 console.log(player1.bank);
@@ -271,6 +291,8 @@ function cardBuying(cardNamePush, cardName) {
                 else {
                     player1.bank -= cardName.upgradePrice1;
                     playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+                    baseRentText.textContent = "BASE RENT: " + cardName.baseRent1;
 
                     cardName.level = 1;
                     levelText.textContent = "LEVEL: 1";
@@ -292,6 +314,8 @@ function cardBuying(cardNamePush, cardName) {
                     player1.bank -= cardName.upgradePrice2;
                     playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
 
+                    baseRentText.textContent = "BASE RENT: " + cardName.baseRent2;
+
                     cardName.level = 2;
                     levelText.textContent = "LEVEL: 2";
 
@@ -311,6 +335,8 @@ function cardBuying(cardNamePush, cardName) {
                 else {
                     player1.bank -= cardName.upgradePrice3;
                     playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+                    baseRentText.textContent = "BASE RENT: " + cardName.baseRent3;
 
                     cardName.level = 3;
                     levelText.textContent = "LEVEL: 3";
@@ -427,6 +453,60 @@ cards[8].addEventListener("click", () => {
     }
     else {
         cardOpen("NewBalance", cardNewBalance);
+    }
+});
+
+cards[9].addEventListener("click", () => {
+    if (cardOpened === "Instagram") {
+        cardClose();
+    }
+    else {
+        cardOpen("Instagram", cardInstagram);
+    }
+});
+
+cards[11].addEventListener("click", () => {
+    if (cardOpened === "TikTok") {
+        cardClose();
+    }
+    else {
+        cardOpen("TikTok", cardTikTok);
+    }
+});
+
+cards[12].addEventListener("click", () => {
+    if (cardOpened === "YouTube") {
+        cardClose();
+    }
+    else {
+        cardOpen("YouTube", cardYouTube);
+    }
+});
+
+cards[14].addEventListener("click", () => {
+    if (cardOpened === "BurgerKing") {
+        cardClose();
+    }
+    else {
+        cardOpen("BurgerKing", cardBurgerKing);
+    }
+});
+
+cards[16].addEventListener("click", () => {
+    if (cardOpened === "Kfc") {
+        cardClose();
+    }
+    else {
+        cardOpen("Kfc", cardKfc);
+    }
+});
+
+cards[17].addEventListener("click", () => {
+    if (cardOpened === "McDonalds") {
+        cardClose();
+    }
+    else {
+        cardOpen("McDonalds", cardMcDonalds);
     }
 });
 

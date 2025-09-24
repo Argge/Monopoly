@@ -47,6 +47,7 @@ class Player {
     lapsNew = 0;
     lapsOld = 0;
     bank = 1000;
+    debt = 0;
     cards = [];
 
     move(steps) {
@@ -89,14 +90,6 @@ class Player {
 function playerRender(positionNew, positionOld) {
     const player = document.createElement("div");
     player.id = "player";
-
-    // for (let i = positionOld; i < positionNew; i++) {
-    //     let midPosNew = i;
-    //     let midPosOld = midPosNew--;
-    //     console.log("midposNew " + midPosNew);
-    //     cards[midPosNew].appendChild(player);
-    //     cards[midPosOld].innerHTML = "";
-    // }
 
     cards[positionNew].appendChild(player);
     cards[positionOld].innerHTML = "";

@@ -39,18 +39,50 @@ randomBtn.addEventListener("click", () => {
 
     if (player1.lapsNew !== player1.lapsOld) {
         let playerBankCounter = document.getElementById("playerBankCounter")
+        const startReward = 1000;
 
-        player1.bank += 1000;
-        playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
-        console.log(player1.lapsNew);
-        console.log("Player 1: +1000$");
+        if (player1.debt === 0) {
+            player1.bank += startReward;
+            playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+            console.log(player1.lapsNew);
+            console.log("Player 1: +1000$");
+        }
+        else {
+            player1.debt -= startReward;
+            if (player1.debt === 0) {
+                player1.bank += startReward;
+            }
+            else if (player1.debt < 0) {
+                player1.bank += player1.debt;
+                player1.debt = 0;
+            }
+        }
+        
     }
 
     if (player1.positionNew === 30) {
         player1.move(10);
         player1.move(10);
         playerPos = 10;
-        console.log("Player has been moved to Jail")
+        console.log("Player has been moved to Jail");
+        if (player1.bank >= 5000) {
+            player1.bank -= 5000;
+        }
+        else if (player1.bank < 5000) {
+
+        }
+    }
+    else if (player1.positionNew === 10) {
+        if (player1.bank >= 5000) {
+            player1.bank -= 5000;
+        }
+        // DEBT LOGIC
+        else if (player1.bank < 5000) {
+            let debt = 0;
+            debt = 5000 - player1.bank;
+            player1.debt += debt;
+            player1.bank = 0;
+        }
     }
 
     console.log("Dice number: " + diceNumber);

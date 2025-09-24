@@ -1,44 +1,84 @@
 import { player1 } from "./main.js";
 import { cardCocaCola, cardNestle, cardNike, cardAdidas, cardNewBalance, cardInstagram, cardTikTok, cardYouTube, cardBurgerKing, cardKfc, cardMcDonalds } from "./cards-values.js";
 
-const cards = [
-    document.getElementById("playerSec2"),
-    document.getElementById("playerSec3"),
-    document.getElementById("playerSec4"),
-    document.getElementById("playerSec5"),
-    document.getElementById("playerSec6"),
-    document.getElementById("playerSec7"),
-    document.getElementById("playerSec8"),
-    document.getElementById("playerSec9"),
-    document.getElementById("playerSec10"),    
-    document.getElementById("playerSec12"),
-    document.getElementById("playerSec13"),
-    document.getElementById("playerSec14"),
-    document.getElementById("playerSec15"),
-    document.getElementById("playerSec16"),
-    document.getElementById("playerSec17"),
-    document.getElementById("playerSec18"),
-    document.getElementById("playerSec19"),
-    document.getElementById("playerSec20"),
-    document.getElementById("playerSec22"),
-    document.getElementById("playerSec23"),
-    document.getElementById("playerSec24"),
-    document.getElementById("playerSec25"),
-    document.getElementById("playerSec26"),
-    document.getElementById("playerSec27"),
-    document.getElementById("playerSec28"),
-    document.getElementById("playerSec29"),
-    document.getElementById("playerSec30"),
-    document.getElementById("playerSec32"),
-    document.getElementById("playerSec33"),
-    document.getElementById("playerSec34"),
-    document.getElementById("playerSec35"),
-    document.getElementById("playerSec36"),
-    document.getElementById("playerSec37"),
-    document.getElementById("playerSec38"),
-    document.getElementById("playerSec39"),
-    document.getElementById("playerSec40"),
-];
+// const cards = [
+//     document.getElementById("playerSec2"),
+//     document.getElementById("playerSec3"),
+//     document.getElementById("playerSec4"),
+//     document.getElementById("playerSec5"),
+//     document.getElementById("playerSec6"),
+//     document.getElementById("playerSec7"),
+//     document.getElementById("playerSec8"),
+//     document.getElementById("playerSec9"),
+//     document.getElementById("playerSec10"),    
+//     document.getElementById("playerSec12"),
+//     document.getElementById("playerSec13"),
+//     document.getElementById("playerSec14"),
+//     document.getElementById("playerSec15"),
+//     document.getElementById("playerSec16"),
+//     document.getElementById("playerSec17"),
+//     document.getElementById("playerSec18"),
+//     document.getElementById("playerSec19"),
+//     document.getElementById("playerSec20"),
+//     document.getElementById("playerSec22"),
+//     document.getElementById("playerSec23"),
+//     document.getElementById("playerSec24"),
+//     document.getElementById("playerSec25"),
+//     document.getElementById("playerSec26"),
+//     document.getElementById("playerSec27"),
+//     document.getElementById("playerSec28"),
+//     document.getElementById("playerSec29"),
+//     document.getElementById("playerSec30"),
+//     document.getElementById("playerSec32"),
+//     document.getElementById("playerSec33"),
+//     document.getElementById("playerSec34"),
+//     document.getElementById("playerSec35"),
+//     document.getElementById("playerSec36"),
+//     document.getElementById("playerSec37"),
+//     document.getElementById("playerSec38"),
+//     document.getElementById("playerSec39"),
+//     document.getElementById("playerSec40"),
+// ];
+const cards = new class Cards {
+    cards = [
+        document.getElementById("playerSec2"),
+        document.getElementById("playerSec3"),
+        document.getElementById("playerSec4"),
+        document.getElementById("playerSec5"),
+        document.getElementById("playerSec6"),
+        document.getElementById("playerSec7"),
+        document.getElementById("playerSec8"),
+        document.getElementById("playerSec9"),
+        document.getElementById("playerSec10"),    
+        document.getElementById("playerSec12"),
+        document.getElementById("playerSec13"),
+        document.getElementById("playerSec14"),
+        document.getElementById("playerSec15"),
+        document.getElementById("playerSec16"),
+        document.getElementById("playerSec17"),
+        document.getElementById("playerSec18"),
+        document.getElementById("playerSec19"),
+        document.getElementById("playerSec20"),
+        document.getElementById("playerSec22"),
+        document.getElementById("playerSec23"),
+        document.getElementById("playerSec24"),
+        document.getElementById("playerSec25"),
+        document.getElementById("playerSec26"),
+        document.getElementById("playerSec27"),
+        document.getElementById("playerSec28"),
+        document.getElementById("playerSec29"),
+        document.getElementById("playerSec30"),
+        document.getElementById("playerSec32"),
+        document.getElementById("playerSec33"),
+        document.getElementById("playerSec34"),
+        document.getElementById("playerSec35"),
+        document.getElementById("playerSec36"),
+        document.getElementById("playerSec37"),
+        document.getElementById("playerSec38"),
+        document.getElementById("playerSec39"),
+        document.getElementById("playerSec40"),    
+    ]
+}
 
 function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
     const gui = document.getElementById("gui");
@@ -92,7 +132,7 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
         imgLogo.src = "img/logo/burger_king_logo.png";
     }
     else if (name === "Kfc") {
-        imgLogo.src = "img/logo/kfc_logo.png";
+        imgLogo.src = "img/logo/white_logos/kfc_logo.png";
     }
     else if (name === "McDonalds") {
         imgLogo.src = "img/logo/mcdonalds_logo.webp";
@@ -411,7 +451,7 @@ function cardClose() {
 //     cardClose();
 // });
 
-cards[0].addEventListener("click", () => {
+cards.cards[0].addEventListener("click", () => {
     if (cardOpened === "CocaCola") {
         cardClose();
     }
@@ -420,7 +460,7 @@ cards[0].addEventListener("click", () => {
     }
 });
 
-cards[2].addEventListener("click", () => {
+cards.cards[2].addEventListener("click", () => {
     if (cardOpened === "Nestle") {
         cardClose();
     }
@@ -429,7 +469,7 @@ cards[2].addEventListener("click", () => {
     }
 });
 
-cards[5].addEventListener("click", () => {
+cards.cards[5].addEventListener("click", () => {
     if (cardOpened === "Nike") {
         cardClose();
     }
@@ -438,7 +478,7 @@ cards[5].addEventListener("click", () => {
     }
 });
 
-cards[7].addEventListener("click", () => {
+cards.cards[7].addEventListener("click", () => {
     if (cardOpened === "Adidas") {
         cardClose();
     }
@@ -447,7 +487,7 @@ cards[7].addEventListener("click", () => {
     }
 });
 
-cards[8].addEventListener("click", () => {
+cards.cards[8].addEventListener("click", () => {
     if (cardOpened === "NewBalance") {
         cardClose();
     }
@@ -456,7 +496,7 @@ cards[8].addEventListener("click", () => {
     }
 });
 
-cards[9].addEventListener("click", () => {
+cards.cards[9].addEventListener("click", () => {
     if (cardOpened === "Instagram") {
         cardClose();
     }
@@ -465,7 +505,7 @@ cards[9].addEventListener("click", () => {
     }
 });
 
-cards[11].addEventListener("click", () => {
+cards.cards[11].addEventListener("click", () => {
     if (cardOpened === "TikTok") {
         cardClose();
     }
@@ -474,7 +514,7 @@ cards[11].addEventListener("click", () => {
     }
 });
 
-cards[12].addEventListener("click", () => {
+cards.cards[12].addEventListener("click", () => {
     if (cardOpened === "YouTube") {
         cardClose();
     }
@@ -483,7 +523,7 @@ cards[12].addEventListener("click", () => {
     }
 });
 
-cards[14].addEventListener("click", () => {
+cards.cards[14].addEventListener("click", () => {
     if (cardOpened === "BurgerKing") {
         cardClose();
     }
@@ -492,7 +532,7 @@ cards[14].addEventListener("click", () => {
     }
 });
 
-cards[16].addEventListener("click", () => {
+cards.cards[16].addEventListener("click", () => {
     if (cardOpened === "Kfc") {
         cardClose();
     }
@@ -501,7 +541,7 @@ cards[16].addEventListener("click", () => {
     }
 });
 
-cards[17].addEventListener("click", () => {
+cards.cards[17].addEventListener("click", () => {
     if (cardOpened === "McDonalds") {
         cardClose();
     }
@@ -510,4 +550,4 @@ cards[17].addEventListener("click", () => {
     }
 });
 
-export { cardInfoRender }
+export { cardInfoRender, cards }

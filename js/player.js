@@ -1,3 +1,5 @@
+import { playerPosCheck } from "./player-position-check.js";
+
 const cards = [
     document.getElementById("playerSec1"),
     document.getElementById("playerSec2"),
@@ -84,6 +86,8 @@ class Player {
         }
            
         playerRender(this.positionNew, this.positionOld);
+
+        playerPosCheck();
     }
 }
 

@@ -1,5 +1,6 @@
 import { Player } from "./player.js";
 import { Dice } from "./dice.js";
+import { playerPosCheck } from "./player-position-check.js";
 
 const randomBtn = document.getElementById("randomBtn");
 const cardsCheckBtn = document.getElementById("cardsCheckBtn");
@@ -71,11 +72,11 @@ randomBtn.addEventListener("click", () => {
         player1.move(10);
         playerPos = 10;
         console.log("Player has been moved to Jail");
-        debt();
+        debt(5000);
     }
     else if (player1.positionNew === 10) {
         console.log("Player is in Jail");
-        debt();
+        debt(5000);
     }
 
     console.log("Dice number: " + diceNumber);
@@ -83,15 +84,15 @@ randomBtn.addEventListener("click", () => {
     console.log(player1);
 });
 
-function debt() {
-    if (player1.bank >= 5000) {
-        player1.bank -= 5000;
+function debt(value1) {
+    if (player1.bank >= value1) {
+        player1.bank -= value1;
         playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
     }
     // DEBT LOGIC
-    else if (player1.bank < 5000) {
+    else if (player1.bank < value1) {
         let debt = 0;
-        debt = 5000 - player1.bank;
+        debt = value1 - player1.bank;
         player1.debt += debt;
         player1.bank = 0;
         playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
@@ -103,4 +104,4 @@ function randomDiceNumber() {
     return ranNum;
 }
 
-export { player1 }
+export { player1, debt }

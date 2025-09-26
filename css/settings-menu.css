@@ -1,7 +1,7 @@
 .menuPattern {
-    width: 300px;
+    min-width: 260px;
 
-    padding: 20px 0 20px 0;
+    padding: 20px;
     background-color: rgba(0, 0, 0, .2);
     backdrop-filter: blur(5px);
     border-radius: 15px;

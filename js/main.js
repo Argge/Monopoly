@@ -5,35 +5,14 @@ import { debt } from "./player-position-check.js";
 const randomBtn = document.getElementById("randomBtn");
 const cardsCheckBtn = document.getElementById("cardsCheckBtn");
 
-let dice = new Dice;
+const dice = new Dice;
 let player1 = new Player;
 let diceNumber = 0;
-let playerPos = 0;
 
 randomBtn.addEventListener("click", () => {
     diceNumber = randomDiceNumber();
     gamingDice.innerHTML = "";
     dice.createDice(diceNumber);
-
-    playerPos += diceNumber;
-    if (playerPos === 41) {
-        playerPos = 1;
-    }
-    else if (playerPos === 42) {
-        playerPos = 2;
-    }
-    else if (playerPos === 43) {
-        playerPos = 3;
-    }
-    else if (playerPos === 44) {
-        playerPos = 4;
-    }
-    else if (playerPos === 45) {
-        playerPos = 5;
-    }
-    else if (playerPos === 46) {
-        playerPos = 6;
-    }
 
     player1.move(diceNumber);
     // player1.move(10);
@@ -67,20 +46,8 @@ randomBtn.addEventListener("click", () => {
         
     }
 
-    if (player1.positionNew === 30) {
-        player1.move(10);
-        player1.move(10);
-        playerPos = 10;
-        console.log("Player has been moved to Jail");
-        debt(5000);
-    }
-    else if (player1.positionNew === 10) {
-        console.log("Player is in Jail");
-        debt(5000);
-    }
-
     console.log("Dice number: " + diceNumber);
-    console.log("Player position: " + playerPos);   
+    console.log("Player position: " + player1.positionNew);   
     console.log(player1);
 });
 

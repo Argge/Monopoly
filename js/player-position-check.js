@@ -1,6 +1,7 @@
 import { player1 } from "./main.js";
-// import { cards } from "./cards-info.js";
 import { cardCocaCola, cardNestle, cardNike, cardAdidas, cardNewBalance, cardInstagram, cardTikTok, cardYouTube, cardBurgerKing, cardKfc, cardMcDonalds } from "./cards-values.js";
+import { cardChanse, messegeRender } from "./chanse-card.js";
+
 
 function playerPosCheck() {
     let pos = player1.positionNew;
@@ -13,11 +14,18 @@ function playerPosCheck() {
     else if (pos === 6) {
         baseRentPay(cardNike);
     }
+    else if (pos === 7) {
+        cardChanse.generate();
+    }
     else if (pos === 8) {
         baseRentPay(cardAdidas);
     }
     else if (pos === 9) {
         baseRentPay(cardNewBalance);
+    }
+    else if (pos === 10 && player1.positionOld !== 30) {
+        debt(5000);
+        messegeRender("YOU STAYED IN JAIL ", "AND", " MISS A MOVE");
     }
     else if (pos === 11) {
         baseRentPay(cardInstagram);
@@ -36,6 +44,18 @@ function playerPosCheck() {
     }
     else if (pos === 19) {
         baseRentPay(19, cardMcDonalds); 
+    }
+    else if (pos === 22) {
+        cardChanse.generate();
+    }
+    else if (pos === 30) {
+        player1.move(-20);
+        debt(5000);
+        player1.positionNew = 10;
+        messegeRender("GO TO JAIL ", "WIHOUT ", "PASSING THE START");
+    }
+    else if (pos === 36) {
+        cardChanse.generate();
     }
 }
 

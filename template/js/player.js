@@ -44,6 +44,8 @@ const cards = [
 ];
 
 class Player {
+    id = null;
+    name = null;
     positionNew = 0;
     positionOld = 0;
     lapsNew = 0;

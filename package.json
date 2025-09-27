@@ -1,0 +1,11 @@
+{
+  "name": "monopoly",
+  "version": "0.0.1",
+  "description": "monopoly game",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "argge",
+  "license": "ISC"
+}

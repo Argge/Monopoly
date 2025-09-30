@@ -1,27 +1,14 @@
 import { Player } from "./player.js";
 import { Dice } from "./dice.js";
-import { debt } from "./player-position-check.js";
+// import { playerName } from "./menu.js";
 
 const socket = io("http://localhost:3200");
 
-const playBtn = document.getElementById("playBtn");
-let playerName = null;
-
-playBtn.addEventListener("click", () => {
-    const usernameInp = document.getElementById("usernameInp").value.trim();
-
-    if (!usernameInp) {
-        alert("Set the nickname!");
-        return;
-    }
-
-    playerName = usernameInp;
-
-});
+const username = localStorage.getItem("username");
 
 socket.on("connect", () => {
-        console.log("Conected:", playerName);
-        socket.emit("joinGame", playerName);
+        console.log("Conected:", username);
+        socket.emit("joinGame", username);
 });
 
 
@@ -74,20 +61,40 @@ randomBtn.addEventListener("click", () => {
     // console.log(player1);
 
     socket.emit("rollDice");
+    socket.emit("startCheck");
 });
 
 socket.on("diceResult", ({playerId, result, position}) => {
-        console.log(`Player ${playerId} rolled dice: ${result}`);
-        if (playerId === socket.id) {
-            gamingDice.innerHTML = "";
-            dice.createDice(result);
-            player1.move(result);
-        }
+    if (playerId === socket.id) {
+
+        gamingDice.innerHTML = "";
+        dice.createDice(result);
+
+        player1.move(result);
+
+        console.log(`Player ${username} rolled dice: ${result}`);
+        console.log(player1);
+    }
 });
 
-function randomDiceNumber() {
-    let ranNum = Math.floor((Math.random() * (7 - 1)) + 1);
-    return ranNum;
-}
+socket.on("startTrue", ({playerId, lapsOld, lapsNew, bank, debt}) => {
+    if (playerId === socket.id) {
+
+        player1.lapsOld = lapsOld;
+        player1.lapsNew = lapsNew;
+        player1.bank = bank;
+        player1.debt = debt;
+
+        playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+        console.log(`Player ${username} claimed for start: 10000$`);
+
+    }
+});
+
+socket.on("disconnect", () => {
+    console.log("Disconnected", username);
+    // socket.emit("disconnect", username);
+});
 
 export { player1 }

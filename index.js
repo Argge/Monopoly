@@ -4,6 +4,7 @@ const { Server } = require("socket.io");
 const path = require("path");
 
 const { rollDice } = require("./moduls/dice.js");
+const { start } = require("./moduls/start.js");
 const { router } = require("./moduls/route.js");
 
 const app = express();
@@ -23,8 +24,6 @@ let gameState = {
 }
 
 io.on("connection", (socket) => {
-    console.log("Player joined:", socket.id);
-
     socket.on("joinGame", (playerName) => {
         gameState.players.push({
             id: socket.id,
@@ -37,6 +36,8 @@ io.on("connection", (socket) => {
             debt: 0,
             cards: []
         });
+
+        console.log("Player joined:", playerName);
 
         io.emit("gameState", gameState);
     });
@@ -58,19 +59,64 @@ io.on("connection", (socket) => {
         const result = rollDice();
 
         currentPlayer.positionOld = currentPlayer.positionNew;
-        currentPlayer.positionNew += result % 40;
+        currentPlayer.positionNew += result;
 
         io.emit("diceResult", {
             playerId: currentPlayer.id,
             result,
-            position: currentPlayer.positionNew
+            position: currentPlayer.positionNew 
         });
 
         gameState.currentTurn = (gameState.currentTurn++) % gameState.players.length;
     });
 
-    socket.on("disconect", () => {
-        console.log("Player disconected:", socket.id);
+    socket.on("startCheck", () => {
+        if (gameState.players.length === 0) {
+            console.log("No players in game");
+            return;
+        }
+
+        const currentPlayer = gameState.players[gameState.currentTurn];
+
+        if (!currentPlayer) {
+            console.log("Error: currentPlayer is not foundet");
+            return;
+        }
+
+        if (currentPlayer.positionNew >= 40) {
+            currentPlayer.positionNew %= 40;
+            currentPlayer.lapsOld = currentPlayer.lapsNew; 
+            currentPlayer.lapsNew++;
+            
+            let startChek = start(currentPlayer);
+
+            if (startChek === true) {
+                io.emit("startTrue", {
+                    playerId: currentPlayer.id,
+                    lapsOld: currentPlayer.lapsOld,
+                    lapsNew: currentPlayer.lapsNew,
+                    bank: currentPlayer.bank,
+                    debt: currentPlayer.debt
+                });
+            }
+        }
+
+        console.log(`${currentPlayer.name} pos: ${currentPlayer.positionNew}`);
+    });
+
+    socket.on("disconnect", () => {
+        if (gameState.currentTurn === 0) {
+            console.log("Player disconnected:", gameState.players[0].name);
+        }
+        else if (gameState.currentTurn === 1) {
+            console.log("Player disconnected:", gameState.players[1].name);
+        }
+        else if (gameState.currentTurn === 2) {
+            console.log("Player disconnected:", gameState.players[2].name);
+        }
+        else if (gameState.currentTurn === 3) {
+            console.log("Player disconnected:", gameState.players[3].name);
+        }
         gameState.players = gameState.players.filter(p => p.i !== socket.id);
         io.emit("gameState", gameState);
     });

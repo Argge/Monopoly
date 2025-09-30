@@ -59,32 +59,14 @@ class Player {
         this.positionNew += steps;
         
         if (this.positionNew >= 40) {
+            this.positionNew %= 40;
             this.lapsOld = this.lapsNew;
             this.lapsNew++;
             setTimeout( () => {
                 if (this.lapsNew !== this.lapsOld) {
                     this.lapsOld++;
                 }
-            }, 1 );
-        }
-
-        if (this.positionNew === 40) {
-        this.positionNew = 0;
-        }
-        else if (this.positionNew === 41) {
-            this.positionNew = 1;
-        }
-        else if (this.positionNew === 42) {
-            this.positionNew = 2;
-        }
-        else if (this.positionNew === 43) {
-            this.positionNew = 3;
-        }
-        else if (this.positionNew === 44) {
-            this.positionNew = 4;
-        }
-        else if (this.positionNew === 45) {
-            this.positionNew = 5;
+            }, 1 ); 
         }
            
         playerRender(this.positionNew, this.positionOld);

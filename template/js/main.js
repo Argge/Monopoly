@@ -85,11 +85,18 @@ socket.on("startTrue", ({playerId, lapsOld, lapsNew, bank, debt}) => {
         player1.bank = bank;
         player1.debt = debt;
 
-        playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+        playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
         console.log(`Player ${username} claimed for start: 10000$`);
-
     }
+});
+
+socket.on("buyingFalse", () => {
+
+});
+
+socket.on("buyingTrue", () => {
+    
 });
 
 socket.on("disconnect", () => {

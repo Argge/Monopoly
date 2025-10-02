@@ -1,3 +1,5 @@
+import { cards } from "./moduls/cards.js";
+
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -5,6 +7,7 @@ const path = require("path");
 
 const { rollDice } = require("./moduls/dice.js");
 const { start } = require("./moduls/start.js");
+const { cardCheking } = require("./moduls/cards-buying.js");
 const { router } = require("./moduls/route.js");
 
 const app = express();
@@ -102,6 +105,34 @@ io.on("connection", (socket) => {
         }
 
         console.log(`${currentPlayer.name} pos: ${currentPlayer.positionNew}`);
+    });
+
+    socket.on("cardBuying", (cardOnClient) => {
+        if (gameState.players.length === 0) {
+            console.log("No players in game");
+            return;
+        }
+
+        const currentPlayer = gameState.players[gameState.currentTurn];
+
+        if (!currentPlayer) {
+            console.log("Error: currentPlayer is not foundet");
+            return;
+        }
+
+        let cardBuyResult = cardCheking(cardOnClient, currentPlayer);
+
+        if (cardBuyResult = false) {
+            io.emit("buyingFalse", {});
+        }
+        else {
+            io.emit("buyingTrue", {
+                playerId: currentPlayer.id,
+                name: currentPlayer.name, 
+                bank: currentPlayer.bank,
+                cardName: cardBuyResult
+            });
+        }
     });
 
     socket.on("disconnect", () => {

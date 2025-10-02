@@ -1,84 +1,45 @@
 import { player1 } from "./main.js";
-import { cardCocaCola, cardNestle, cardNike, cardAdidas, cardNewBalance, cardInstagram, cardTikTok, cardYouTube, cardBurgerKing, cardKfc, cardMcDonalds } from "./cards-values.js";
+import { cards } from "./cards-values.js";
 
-// const cards = [
-//     document.getElementById("playerSec2"),
-//     document.getElementById("playerSec3"),
-//     document.getElementById("playerSec4"),
-//     document.getElementById("playerSec5"),
-//     document.getElementById("playerSec6"),
-//     document.getElementById("playerSec7"),
-//     document.getElementById("playerSec8"),
-//     document.getElementById("playerSec9"),
-//     document.getElementById("playerSec10"),    
-//     document.getElementById("playerSec12"),
-//     document.getElementById("playerSec13"),
-//     document.getElementById("playerSec14"),
-//     document.getElementById("playerSec15"),
-//     document.getElementById("playerSec16"),
-//     document.getElementById("playerSec17"),
-//     document.getElementById("playerSec18"),
-//     document.getElementById("playerSec19"),
-//     document.getElementById("playerSec20"),
-//     document.getElementById("playerSec22"),
-//     document.getElementById("playerSec23"),
-//     document.getElementById("playerSec24"),
-//     document.getElementById("playerSec25"),
-//     document.getElementById("playerSec26"),
-//     document.getElementById("playerSec27"),
-//     document.getElementById("playerSec28"),
-//     document.getElementById("playerSec29"),
-//     document.getElementById("playerSec30"),
-//     document.getElementById("playerSec32"),
-//     document.getElementById("playerSec33"),
-//     document.getElementById("playerSec34"),
-//     document.getElementById("playerSec35"),
-//     document.getElementById("playerSec36"),
-//     document.getElementById("playerSec37"),
-//     document.getElementById("playerSec38"),
-//     document.getElementById("playerSec39"),
-//     document.getElementById("playerSec40"),
-// ];
-const cards = new class Cards {
-    cards = [
-        document.getElementById("playerSec2"),
-        document.getElementById("playerSec3"),
-        document.getElementById("playerSec4"),
-        document.getElementById("playerSec5"),
-        document.getElementById("playerSec6"),
-        document.getElementById("playerSec7"),
-        document.getElementById("playerSec8"),
-        document.getElementById("playerSec9"),
-        document.getElementById("playerSec10"),    
-        document.getElementById("playerSec12"),
-        document.getElementById("playerSec13"),
-        document.getElementById("playerSec14"),
-        document.getElementById("playerSec15"),
-        document.getElementById("playerSec16"),
-        document.getElementById("playerSec17"),
-        document.getElementById("playerSec18"),
-        document.getElementById("playerSec19"),
-        document.getElementById("playerSec20"),
-        document.getElementById("playerSec22"),
-        document.getElementById("playerSec23"),
-        document.getElementById("playerSec24"),
-        document.getElementById("playerSec25"),
-        document.getElementById("playerSec26"),
-        document.getElementById("playerSec27"),
-        document.getElementById("playerSec28"),
-        document.getElementById("playerSec29"),
-        document.getElementById("playerSec30"),
-        document.getElementById("playerSec32"),
-        document.getElementById("playerSec33"),
-        document.getElementById("playerSec34"),
-        document.getElementById("playerSec35"),
-        document.getElementById("playerSec36"),
-        document.getElementById("playerSec37"),
-        document.getElementById("playerSec38"),
-        document.getElementById("playerSec39"),
-        document.getElementById("playerSec40"),    
-    ]
-}
+const cardsSec = [
+    document.getElementById("playerSec2"),
+    document.getElementById("playerSec3"),
+    document.getElementById("playerSec4"),
+    document.getElementById("playerSec5"),
+    document.getElementById("playerSec6"),
+    document.getElementById("playerSec7"),
+    document.getElementById("playerSec8"),
+    document.getElementById("playerSec9"),
+    document.getElementById("playerSec10"),    
+    document.getElementById("playerSec12"),
+    document.getElementById("playerSec13"),
+    document.getElementById("playerSec14"),
+    document.getElementById("playerSec15"),
+    document.getElementById("playerSec16"),
+    document.getElementById("playerSec17"),
+    document.getElementById("playerSec18"),
+    document.getElementById("playerSec19"),
+    document.getElementById("playerSec20"),
+    document.getElementById("playerSec22"),
+    document.getElementById("playerSec23"),
+    document.getElementById("playerSec24"),
+    document.getElementById("playerSec25"),
+    document.getElementById("playerSec26"),
+    document.getElementById("playerSec27"),
+    document.getElementById("playerSec28"),
+    document.getElementById("playerSec29"),
+    document.getElementById("playerSec30"),
+    document.getElementById("playerSec32"),
+    document.getElementById("playerSec33"),
+    document.getElementById("playerSec34"),
+    document.getElementById("playerSec35"),
+    document.getElementById("playerSec36"),
+    document.getElementById("playerSec37"),
+    document.getElementById("playerSec38"),
+    document.getElementById("playerSec39"),
+    document.getElementById("playerSec40"),
+];
+
 
 function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
     const gui = document.getElementById("gui");
@@ -290,7 +251,86 @@ function cardColorBgDefine(obj, name) {
     }
 }
 
-function cardBuying(cardNamePush, cardName) {
+const cardBuying = {
+
+    tools() {
+        let levelText = document.getElementById("levelText");
+        let priceText = document.getElementById("priceText");
+        let btnText = document.getElementById("cardBtnText");
+
+        function firstBuy(cardOnClient) {
+            playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+            let ownerText = document.getElementById(cardOnClient.name);
+
+            ownerText.textContent = "OWNER: " + cardOnClient.owner;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent0;
+
+            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice1;
+
+            btnText.textContent = "UPGRADE";
+
+            console.log("Player buyed card: " + cardOnClient.name);
+            console.log(player1.bank);
+        }
+
+        function upgrade1(cardOnClient) {
+            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent1;
+
+            levelText.textContent = "LEVEL: 1";
+
+            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice2;
+
+            let levelBlock = document.getElementById("levelBlock1");
+            levelBlock.classList.add("cardLevel1");
+
+            console.log("Player upgraded card: " + cardOnClient.name + " to 1LVL!");
+            console.log(player1.bank);
+        }
+
+        function upgrade2(cardOnClient) {
+            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent2;
+
+            levelText.textContent = "LEVEL: 2";
+
+            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice3;
+
+            let levelBlock = document.getElementById("levelBlock2");
+            levelBlock.classList.add("cardLevel1");
+
+            console.log("Player upgraded card: " + cardOnClient.name + " to 2LVL!");
+            console.log(player1.bank);        
+        }
+
+        function upgrade3(cardOnClient) {
+            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent3;
+
+            levelText.textContent = "LEVEL: 3";
+
+            priceText.textContent = "";
+
+            let levelBlock = document.getElementById("levelBlock3");
+            levelBlock.classList.add("cardLevel1");
+
+            btnText.textContent = "MAX";
+            cardUpgradeBtn.disabled = true;
+
+            console.log("Player upgraded card: " + cardOnClient.name + " to 3LVL!");
+            console.log(player1.bank);    
+        }
+
+        warnWin();
+    }
+}
+
+function cardBuying(cardName) {
     
     let buyBtn = document.getElementById("cardUpgradeBtn");
 
@@ -302,14 +342,10 @@ function cardBuying(cardNamePush, cardName) {
 
         // IF THE CARD HASN'T OWNER
         if (cardName.owner === null) {
-            // WARN
             if (player1.bank < cardName.price) {
                 warnWin();
             }
-            // BUYING
             else {
-                player1.bank -= cardName.price;
-                player1.cards.push(cardNamePush);
                 playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
 
                 let ownerText = document.getElementById(cardName.name);
@@ -319,7 +355,7 @@ function cardBuying(cardNamePush, cardName) {
                 priceText.textContent = "UPGRADE PRICE: " + cardName.upgradePrice1;
                 baseRentText.textContent = "BASE RENT: " + cardName.baseRent0;
 
-                console.log("Player buyed card: " + cardNamePush);
+                console.log("Player buyed card: " + cardName.name);
                 console.log(player1.bank);
             }
         }
@@ -342,7 +378,7 @@ function cardBuying(cardNamePush, cardName) {
                     let levelBlock = document.getElementById("levelBlock1");
                     levelBlock.classList.add("cardLevel1");
 
-                    console.log("Player upgraded card: " + cardNamePush + " to 1LVL!");
+                    console.log("Player upgraded card: " + cardName.name + " to 1LVL!");
                     console.log(player1.bank);
                 } 
             }
@@ -364,7 +400,7 @@ function cardBuying(cardNamePush, cardName) {
                     let levelBlock = document.getElementById("levelBlock2");
                     levelBlock.classList.add("cardLevel1");
 
-                    console.log("Player upgraded card: " + cardNamePush + " to 2LVL!");
+                    console.log("Player upgraded card: " + cardName.name + " to 2LVL!");
                     console.log(player1.bank);
                 }
             }
@@ -390,7 +426,7 @@ function cardBuying(cardNamePush, cardName) {
                     cardUpgradeBtn.disabled = true;
                     
 
-                    console.log("Player upgraded card: " + cardNamePush + " to 3LVL!");
+                    console.log("Player upgraded card: " + cardName.name + " to 3LVL!");
                     console.log(player1.bank);
                 }
             }
@@ -421,20 +457,19 @@ function warnWin() {
 }
 
 let cardOpened = null;
-function cardOpen(name, cardObj) {
+function cardOpen(cardOnClient) {
     let gui = document.getElementById("gui");
     if (cardOpened) {
         let cardBG = document.getElementById("cardInfoBG");
         gui.removeChild(cardBG);
     }
     
-    cardObj.name = name;
-    cardObj.first();
-    cardBuying(name, cardObj);
+    cardOnClient.first();
+    cardBuying(cardOnClient);
     gui.style.backdropFilter = "blur(3px)";
     randomBtn.style.zIndex = "0";
 
-    cardOpened = name;
+    cardOpened = cardOnClient.name;
 }
 
 function cardClose() {
@@ -447,107 +482,105 @@ function cardClose() {
     cardOpened = null;
 }
 
-// gui.addEventListener("click", () => {
-//     cardClose();
-// });
 
-cards.cards[0].addEventListener("click", () => {
+
+cardsSec[0].addEventListener("click", () => {
     if (cardOpened === "CocaCola") {
         cardClose();
     }
     else {
-        cardOpen("CocaCola", cardCocaCola);
+        cardOpen(cards.CocaCola);
     }
 });
 
-cards.cards[2].addEventListener("click", () => {
+cardsSec[2].addEventListener("click", () => {
     if (cardOpened === "Nestle") {
         cardClose();
     }
     else {
-        cardOpen("Nestle", cardNestle);
+        cardOpen(cards.Nestle);
     }
 });
 
-cards.cards[5].addEventListener("click", () => {
+cardsSec[5].addEventListener("click", () => {
     if (cardOpened === "Nike") {
         cardClose();
     }
     else {
-        cardOpen("Nike", cardNike);
+        cardOpen(cards.Nike);
     }
 });
 
-cards.cards[7].addEventListener("click", () => {
+cardsSec[7].addEventListener("click", () => {
     if (cardOpened === "Adidas") {
         cardClose();
     }
     else {
-        cardOpen("Adidas", cardAdidas);
+        cardOpen(cards.Adidas);
     }
 });
 
-cards.cards[8].addEventListener("click", () => {
+cardsSec[8].addEventListener("click", () => {
     if (cardOpened === "NewBalance") {
         cardClose();
     }
     else {
-        cardOpen("NewBalance", cardNewBalance);
+        cardOpen(cards.NewBalance);
     }
 });
 
-cards.cards[9].addEventListener("click", () => {
+cardsSec[9].addEventListener("click", () => {
     if (cardOpened === "Instagram") {
         cardClose();
     }
     else {
-        cardOpen("Instagram", cardInstagram);
+        cardOpen(cards.Instagram);
     }
 });
 
-cards.cards[11].addEventListener("click", () => {
+cardsSec[11].addEventListener("click", () => {
     if (cardOpened === "TikTok") {
         cardClose();
     }
     else {
-        cardOpen("TikTok", cardTikTok);
+        cardOpen(cards.TikTok);
     }
 });
 
-cards.cards[12].addEventListener("click", () => {
+cardsSec[12].addEventListener("click", () => {
     if (cardOpened === "YouTube") {
         cardClose();
     }
     else {
-        cardOpen("YouTube", cardYouTube);
+        cardOpen(cards.YouTube);
     }
 });
 
-cards.cards[14].addEventListener("click", () => {
+cardsSec[14].addEventListener("click", () => {
     if (cardOpened === "BurgerKing") {
         cardClose();
     }
     else {
-        cardOpen("BurgerKing", cardBurgerKing);
+        cardOpen(cards.BurgerKing);
     }
 });
 
-cards.cards[16].addEventListener("click", () => {
+cardsSec[16].addEventListener("click", () => {
     if (cardOpened === "Kfc") {
         cardClose();
     }
     else {
-        cardOpen("Kfc", cardKfc);
+        cardOpen(cards.Kfc);
     }
 });
 
-cards.cards[17].addEventListener("click", () => {
+cardsSec[17].addEventListener("click", () => {
     if (cardOpened === "McDonalds") {
         cardClose();
     }
     else {
-        cardOpen("McDonalds", cardMcDonalds);
+        cardOpen(cards.McDonalds);
     }
 });
 
-export { cardInfoRender, cards }
+export { cardInfoRender }

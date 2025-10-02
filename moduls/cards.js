@@ -1,5 +1,3 @@
-import { cardInfoRender } from "./cards-info.js";
-
 class CardInfo {
     name = null;
     owner = null;
@@ -30,6 +28,7 @@ const cards = {
     BurgerKing: new CardInfo,
     Kfc: new CardInfo,
     McDonalds: new CardInfo,
+
 }
 
 cards.CocaCola.name = "CocaCola";

@@ -123,7 +123,7 @@ io.on("connection", (socket) => {
         let cardBuyResult = cardCheking(cardOnClient, currentPlayer);
 
         if (cardBuyResult = false) {
-            io.emit("buyingFalse", {});
+            io.emit("buyingFalse");
         }
         else {
             io.emit("buyingTrue", {

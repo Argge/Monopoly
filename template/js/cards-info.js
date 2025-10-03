@@ -40,6 +40,109 @@ const cardsSec = [
     document.getElementById("playerSec40"),
 ];
 
+const cardBuying = {
+        firstBuy: (cardOnClient) => {
+            let levelText = document.getElementById("levelText");
+            let priceText = document.getElementById("priceText");
+            let btnText = document.getElementById("cardBtnText");
+
+            playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+
+            let ownerText = document.getElementById(cardOnClient.name);
+
+            ownerText.textContent = "OWNER: " + cardOnClient.owner;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent0;
+
+            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice1;
+
+            btnText.textContent = "UPGRADE";
+
+            console.log("Player buyed card: " + cardOnClient.name);
+            console.log(player1.bank);
+        },
+        
+        upgrade1: (cardOnClient) => {
+            let levelText = document.getElementById("levelText");
+            let priceText = document.getElementById("priceText");
+            let btnText = document.getElementById("cardBtnText");
+
+            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent1;
+
+            levelText.textContent = "LEVEL: 1";
+
+            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice2;
+
+            let levelBlock = document.getElementById("levelBlock1");
+            levelBlock.classList.add("cardLevel1");
+
+            console.log("Player upgraded card: " + cardOnClient.name + " to 1LVL!");
+            console.log(player1.bank);
+        },
+
+        upgrade2: (cardOnClient) => {
+            let levelText = document.getElementById("levelText");
+            let priceText = document.getElementById("priceText");
+            let btnText = document.getElementById("cardBtnText");
+
+            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent2;
+
+            levelText.textContent = "LEVEL: 2";
+
+            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice3;
+
+            let levelBlock = document.getElementById("levelBlock2");
+            levelBlock.classList.add("cardLevel1");
+
+            console.log("Player upgraded card: " + cardOnClient.name + " to 2LVL!");
+            console.log(player1.bank);
+        },
+
+        upgrade3: (cardOnClient) => {
+            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+
+            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent3;
+
+            levelText.textContent = "LEVEL: 3";
+
+            priceText.textContent = "";
+
+            let levelBlock = document.getElementById("levelBlock3");
+            levelBlock.classList.add("cardLevel1");
+
+            btnText.textContent = "MAX";
+            cardUpgradeBtn.disabled = true;
+
+            console.log("Player upgraded card: " + cardOnClient.name + " to 3LVL!");
+            console.log(player1.bank);
+        },
+
+        warnWin: () => {
+            const mainWin = document.createElement("div");
+            mainWin.id = "settingsMenu";
+            mainWin.classList.add("menuPattern");
+            gui.appendChild(mainWin);
+
+            let infoText = document.createElement("p");
+            infoText.classList.add("infoText");
+            infoText.textContent = "NOT ENOUGH MONEY";
+            mainWin.appendChild(infoText);
+
+            randomBtn.style.zIndex = "0";
+
+            setTimeout( () => {
+                gui.removeChild(mainWin);
+                if (cardOpened === null) {
+                randomBtn.style.zIndex = "2";   
+                }
+                
+            }, 2500);
+        }
+}
 
 function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
     const gui = document.getElementById("gui");
@@ -251,124 +354,20 @@ function cardColorBgDefine(obj, name) {
     }
 }
 
-const cardBuying = {
-        firstBuy: (cardOnClient) => {
-            let levelText = document.getElementById("levelText");
-            let priceText = document.getElementById("priceText");
-            let btnText = document.getElementById("cardBtnText");
-
-            playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
-
-            let ownerText = document.getElementById(cardOnClient.name);
-
-            ownerText.textContent = "OWNER: " + cardOnClient.owner;
-
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent0;
-
-            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice1;
-
-            btnText.textContent = "UPGRADE";
-
-            console.log("Player buyed card: " + cardOnClient.name);
-            console.log(player1.bank);
-        },
-        
-        upgrade1: (cardOnClient) => {
-            let levelText = document.getElementById("levelText");
-            let priceText = document.getElementById("priceText");
-            let btnText = document.getElementById("cardBtnText");
-
-            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
-
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent1;
-
-            levelText.textContent = "LEVEL: 1";
-
-            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice2;
-
-            let levelBlock = document.getElementById("levelBlock1");
-            levelBlock.classList.add("cardLevel1");
-
-            console.log("Player upgraded card: " + cardOnClient.name + " to 1LVL!");
-            console.log(player1.bank);
-        },
-
-        upgrade2: (cardOnClient) => {
-            let levelText = document.getElementById("levelText");
-            let priceText = document.getElementById("priceText");
-            let btnText = document.getElementById("cardBtnText");
-
-            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
-
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent2;
-
-            levelText.textContent = "LEVEL: 2";
-
-            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice3;
-
-            let levelBlock = document.getElementById("levelBlock2");
-            levelBlock.classList.add("cardLevel1");
-
-            console.log("Player upgraded card: " + cardOnClient.name + " to 2LVL!");
-            console.log(player1.bank);
-        },
-
-        upgrade3: (cardOnClient) => {
-            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
-
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent3;
-
-            levelText.textContent = "LEVEL: 3";
-
-            priceText.textContent = "";
-
-            let levelBlock = document.getElementById("levelBlock3");
-            levelBlock.classList.add("cardLevel1");
-
-            btnText.textContent = "MAX";
-            cardUpgradeBtn.disabled = true;
-
-            console.log("Player upgraded card: " + cardOnClient.name + " to 3LVL!");
-            console.log(player1.bank);
-        },
-
-        warnWin: () => {
-            const mainWin = document.createElement("div");
-            mainWin.id = "settingsMenu";
-            mainWin.classList.add("menuPattern");
-            gui.appendChild(mainWin);
-
-            let infoText = document.createElement("p");
-            infoText.classList.add("infoText");
-            infoText.textContent = "NOT ENOUGH MONEY";
-            mainWin.appendChild(infoText);
-
-            randomBtn.style.zIndex = "0";
-
-            setTimeout( () => {
-                gui.removeChild(mainWin);
-                if (cardOpened === null) {
-                randomBtn.style.zIndex = "2";   
-                }
-                
-            }, 2500);
-        }
-}
-
 let cardOpened = { condition: null }
 
-function cardOpen(cardOnClient) {
+function cardOpen(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, price, upgradePrice1, upgradePrice2, upgradePrice3, cardName) {
     let gui = document.getElementById("gui");
     if (cardOpened.condition) {
         let cardBG = document.getElementById("cardInfoBG");
         gui.removeChild(cardBG);
     }
     
-    cardOnClient.first();
+    cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, price, upgradePrice1, upgradePrice2, upgradePrice3, cardName);
     gui.style.backdropFilter = "blur(3px)";
     randomBtn.style.zIndex = "0";
 
-    cardOpened.condition = cardOnClient.name;
+    cardOpened.condition = cardName;
 }
 
 function cardClose() {
@@ -384,102 +383,102 @@ function cardClose() {
 
 
 cardsSec[0].addEventListener("click", () => {
-    if (cardOpened === "CocaCola") {
-        cardClose();
+    if (cardOpened.condition === cards.CocaCola.name) {
+        cards.CocaCola.close();
     }
     else {
-        cardOpen(cards.CocaCola);
+        cards.CocaCola.open();
     }
 });
 
 cardsSec[2].addEventListener("click", () => {
-    if (cardOpened === "Nestle") {
-        cardClose();
+    if (cardOpened.condition === cards.Nestle.name) {
+        cards.Nestle.close();
     }
     else {
-        cardOpen(cards.Nestle);
+        cards.Nestle.open();
     }
 });
 
 cardsSec[5].addEventListener("click", () => {
-    if (cardOpened === "Nike") {
-        cardClose();
+    if (cardOpened.condition === cards.Nike.name) {
+        cards.Nike.close();
     }
     else {
-        cardOpen(cards.Nike);
+        cards.Nike.open();
     }
 });
 
 cardsSec[7].addEventListener("click", () => {
-    if (cardOpened === "Adidas") {
-        cardClose();
+    if (cardOpened.condition === cards.Adidas.name) {
+        cards.Adidas.close();
     }
     else {
-        cardOpen(cards.Adidas);
+        cards.Adidas.open();
     }
 });
 
 cardsSec[8].addEventListener("click", () => {
-    if (cardOpened === "NewBalance") {
-        cardClose();
+    if (cardOpened.condition === cards.NewBalance.name) {
+        cards.NewBalance.close();
     }
     else {
-        cardOpen(cards.NewBalance);
+        cards.NewBalance.open();
     }
 });
 
 cardsSec[9].addEventListener("click", () => {
-    if (cardOpened === "Instagram") {
-        cardClose();
+    if (cardOpened.condition === cards.Instagram.name) {
+        cards.Instagram.close();
     }
     else {
-        cardOpen(cards.Instagram);
+        cards.Instagram.open();
     }
 });
 
 cardsSec[11].addEventListener("click", () => {
-    if (cardOpened === "TikTok") {
-        cardClose();
+    if (cardOpened.condition === cards.TikTok.name) {
+        cards.TikTok.close();
     }
     else {
-        cardOpen(cards.TikTok);
+        cards.TikTok.open();
     }
 });
 
 cardsSec[12].addEventListener("click", () => {
-    if (cardOpened === "YouTube") {
-        cardClose();
+    if (cardOpened.condition === cards.YouTube.name) {
+        cards.YouTube.close();
     }
     else {
-        cardOpen(cards.YouTube);
+        cards.YouTube.open();
     }
 });
 
 cardsSec[14].addEventListener("click", () => {
-    if (cardOpened === "BurgerKing") {
-        cardClose();
+    if (cardOpened.condition === cards.BurgerKing.name) {
+        cards.BurgerKing.close();
     }
     else {
-        cardOpen(cards.BurgerKing);
+        cards.BurgerKing.open();
     }
 });
 
 cardsSec[16].addEventListener("click", () => {
-    if (cardOpened === "Kfc") {
-        cardClose();
+    if (cardOpened.condition === cards.Kfc.name) {
+        cards.Kfc.close();
     }
     else {
-        cardOpen(cards.Kfc);
+        cards.Kfc.open();
     }
 });
 
 cardsSec[17].addEventListener("click", () => {
-    if (cardOpened === "McDonalds") {
-        cardClose();
+    if (cardOpened.condition === cards.McDonalds.name) {
+        cards.McDonalds.close();
     }
     else {
-        cardOpen(cards.McDonalds);
+        cards.McDonalds.open();
     }
 });
 
-export { cardInfoRender, cardBuying, cardOpened }
+export { cardInfoRender, cardOpen, cardClose, cardBuying, cardOpened }

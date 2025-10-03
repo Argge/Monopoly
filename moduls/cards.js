@@ -11,9 +11,10 @@ class CardInfo {
     upgradePrice2 = 0;
     upgradePrice3 = 0;
 
-    first() {
-        cardInfoRender(this.owner, this.baseRent0, this.baseRent1, this.baseRent2, this.baseRent3, this.level, this.price, this.upgradePrice1, this.upgradePrice2, this.upgradePrice3, this.name);
+    open = () => {
+        cardOpen(this.owner, this.baseRent0, this.baseRent1, this.baseRent2, this.baseRent3, this.level, this.price, this.upgradePrice1, this.upgradePrice2, this.upgradePrice3, this.name);
     }
+    close = cardClose();
 }
 
 const cards = {

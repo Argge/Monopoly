@@ -107,7 +107,7 @@ io.on("connection", (socket) => {
         console.log(`${currentPlayer.name} pos: ${currentPlayer.positionNew}`);
     });
 
-    socket.on("cardBuying", (cardOnClient) => {
+    socket.on("cardBuyingReq", (cardOnClient) => {
         if (gameState.players.length === 0) {
             console.log("No players in game");
             return;
@@ -128,9 +128,8 @@ io.on("connection", (socket) => {
         else {
             io.emit("buyingTrue", {
                 playerId: currentPlayer.id,
-                name: currentPlayer.name, 
                 bank: currentPlayer.bank,
-                cardName: cardBuyResult
+                cardOnServer: cardBuyResult
             });
         }
     });

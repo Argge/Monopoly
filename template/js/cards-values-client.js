@@ -1,4 +1,4 @@
-import { cardOpen, cardClose, cardInfoRender } from "./cards-info.js";
+import { cardOpen, cardClose } from "./cards-info.js";
 
 class CardInfo {
     name = null;
@@ -16,7 +16,9 @@ class CardInfo {
     open = () => {
         cardOpen(this.owner, this.baseRent0, this.baseRent1, this.baseRent2, this.baseRent3, this.level, this.price, this.upgradePrice1, this.upgradePrice2, this.upgradePrice3, this.name);
     }
-    close = cardClose();
+    close = () => {
+        cardClose();
+    }
 }
 
 const cards = {
@@ -58,29 +60,89 @@ cards.Nike.price = 9000;
 cards.Nike.upgradePrice1 = 11000;
 cards.Nike.upgradePrice2 = 13000;
 cards.Nike.upgradePrice3 = 14500;
+cards.Nike.baseRent0 = 0;
+cards.Nike.baseRent1 = 0;
+cards.Nike.baseRent2 = 0;
+cards.Nike.baseRent3 = 0;
 
 cards.Adidas.name = "Adidas";
 cards.Adidas.price = 10000;
 cards.Adidas.upgradePrice1 = 13000;
 cards.Adidas.upgradePrice2 = 15000;
 cards.Adidas.upgradePrice3 = 16500;
+cards.Adidas.baseRent0 = 0;
+cards.Adidas.baseRent1 = 0;
+cards.Adidas.baseRent2 = 0;
+cards.Adidas.baseRent3 = 0;
 
 cards.NewBalance.name = "NewBalance";
 cards.NewBalance.price = 11000;
 cards.NewBalance.upgradePrice1 = 14000;
 cards.NewBalance.upgradePrice2 = 17000;
 cards.NewBalance.upgradePrice3 = 20000;
+cards.NewBalance.baseRent0 = 0;
+cards.NewBalance.baseRent1 = 0;
+cards.NewBalance.baseRent2 = 0;
+cards.NewBalance.baseRent3 = 0;
 
 cards.Instagram.name = "Instagram";
+cards.Instagram.price = 0;
+cards.Instagram.upgradePrice1 = 0;
+cards.Instagram.upgradePrice2 = 0;
+cards.Instagram.upgradePrice3 = 0;
+cards.Instagram.baseRent0 = 0;
+cards.Instagram.baseRent1 = 0;
+cards.Instagram.baseRent2 = 0;
+cards.Instagram.baseRent3 = 0;
 
 cards.TikTok.name = "TikTok";
+cards.TikTok.price = 0;
+cards.TikTok.upgradePrice1 = 0;
+cards.TikTok.upgradePrice2 = 0;
+cards.TikTok.upgradePrice3 = 0;
+cards.TikTok.baseRent0 = 0;
+cards.TikTok.baseRent1 = 0;
+cards.TikTok.baseRent2 = 0;
+cards.TikTok.baseRent3 = 0;
 
 cards.YouTube.name = "YouTube";
+cards.YouTube.price = 0;
+cards.YouTube.upgradePrice1 = 0;
+cards.YouTube.upgradePrice2 = 0;
+cards.YouTube.upgradePrice3 = 0;
+cards.YouTube.baseRent0 = 0;
+cards.YouTube.baseRent1 = 0;
+cards.YouTube.baseRent2 = 0;
+cards.YouTube.baseRent3 = 0;
 
 cards.BurgerKing.name = "BurgerKing";
+cards.BurgerKing.price = 0;
+cards.BurgerKing.upgradePrice1 = 0;
+cards.BurgerKing.upgradePrice2 = 0;
+cards.BurgerKing.upgradePrice3 = 0;
+cards.BurgerKing.baseRent0 = 0;
+cards.BurgerKing.baseRent1 = 0;
+cards.BurgerKing.baseRent2 = 0;
+cards.BurgerKing.baseRent3 = 0;
 
 cards.Kfc.name = "Kfc";
+cards.Kfc.price = 0;
+cards.Kfc.upgradePrice1 = 0;
+cards.Kfc.upgradePrice2 = 0;
+cards.Kfc.upgradePrice3 = 0;
+cards.Kfc.baseRent0 = 0;
+cards.Kfc.baseRent1 = 0;
+cards.Kfc.baseRent2 = 0;
+cards.Kfc.baseRent3 = 0;
 
 cards.McDonalds.name = "McDonalds";
+cards.McDonalds.price = 0;
+cards.McDonalds.upgradePrice1 = 0;
+cards.McDonalds.upgradePrice2 = 0;
+cards.McDonalds.upgradePrice3 = 0;
+cards.McDonalds.baseRent0 = 0;
+cards.McDonalds.baseRent1 = 0;
+cards.McDonalds.baseRent2 = 0;
+cards.McDonalds.baseRent3 = 0;
 
 export { cards };

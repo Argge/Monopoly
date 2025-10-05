@@ -1,4 +1,4 @@
-import { cards } from "./moduls/cards.js";
+// import { cards } from "./moduls/cards.js";
 
 const express = require("express");
 const http = require("http");
@@ -42,7 +42,19 @@ io.on("connection", (socket) => {
 
         console.log("Player joined:", playerName);
 
-        io.emit("gameState", gameState);
+        const currentPlayer = gameState.players[gameState.currentTurn];
+
+        io.emit("gameState", {
+            playerId: currentPlayer.id,
+            name: currentPlayer.name,
+            positionNew: currentPlayer.positionNew,
+            positionOld: currentPlayer.positionOld,
+            lapsNew: currentPlayer.lapsNew,
+            lapsOld: currentPlayer.lapsOld,
+            bank: currentPlayer.bank,
+            debt: currentPlayer.debt,
+            cards: currentPlayer.cards
+        });
     });
 
     socket.on("rollDice", () => {
@@ -108,6 +120,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("cardBuyingReq", (cardOnClient) => {
+        console.log("Buying request has been claimed");
         if (gameState.players.length === 0) {
             console.log("No players in game");
             return;
@@ -122,15 +135,18 @@ io.on("connection", (socket) => {
 
         let cardBuyResult = cardCheking(cardOnClient, currentPlayer);
 
-        if (cardBuyResult = false) {
+        if (cardBuyResult === false) {
             io.emit("buyingFalse");
+            console.log("Buying false");
         }
         else {
             io.emit("buyingTrue", {
                 playerId: currentPlayer.id,
+                playerCards: currentPlayer.cards,
                 bank: currentPlayer.bank,
                 cardOnServer: cardBuyResult
             });
+            console.log("Buying true");
         }
     });
 
@@ -147,8 +163,19 @@ io.on("connection", (socket) => {
         else if (gameState.currentTurn === 3) {
             console.log("Player disconnected:", gameState.players[3].name);
         }
-        gameState.players = gameState.players.filter(p => p.i !== socket.id);
-        io.emit("gameState", gameState);
+        gameState.players = gameState.players.filter(p => p.id !== socket.id);
+
+        io.emit("gameState", {
+            playerId: currentPlayer.id,
+            name: currentPlayer.name,
+            positionNew: currentPlayer.positionNew,
+            positionOld: currentPlayer.positionOld,
+            lapsNew: currentPlayer.lapsNew,
+            lapsOld: currentPlayer.lapsOld,
+            bank: currentPlayer.bank,
+            debt: currentPlayer.debt,
+            cards: currentPlayer.cards
+        });
     });
 });
 

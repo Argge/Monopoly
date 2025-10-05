@@ -1,49 +1,49 @@
 import { player1 } from "./main.js";
-import { cardCocaCola, cardNestle, cardNike, cardAdidas, cardNewBalance, cardInstagram, cardTikTok, cardYouTube, cardBurgerKing, cardKfc, cardMcDonalds } from "./cards-values.js";
+import { cards } from "./cards-values-client.js";
 import { cardChanse, messegeRender } from "./chanse-card.js";
 
 
 function playerPosCheck() {
     let pos = player1.positionNew;
     if (pos === 1) {
-        baseRentPay(cardCocaCola);
+        baseRentPay(cards.CocaCola);
     }
     else if (pos === 3) {
-        baseRentPay(cardNestle);
+        baseRentPay(cards.Nestle);
     }
     else if (pos === 6) {
-        baseRentPay(cardNike);
+        baseRentPay(cards.Nike);
     }
     else if (pos === 7) {
         cardChanse.generate();
     }
     else if (pos === 8) {
-        baseRentPay(cardAdidas);
+        baseRentPay(cards.Adidas);
     }
     else if (pos === 9) {
-        baseRentPay(cardNewBalance);
+        baseRentPay(cards.NewBalance);
     }
     else if (pos === 10 && player1.positionOld !== 30) {
         debt(5000);
         messegeRender("YOU STAYED IN JAIL ", "AND", " MISS A MOVE");
     }
     else if (pos === 11) {
-        baseRentPay(cardInstagram);
+        baseRentPay(cards.Instagram);
     }
     else if (pos === 13) {
-        baseRentPay(cardTikTok);
+        baseRentPay(cards.TikTok);
     }
     else if (pos === 14) {
-        baseRentPay(cardYouTube);
+        baseRentPay(cards.YouTube);
     }
     else if (pos === 16) {
-        baseRentPay(cardBurgerKing);
+        baseRentPay(cards.BurgerKing);
     }
     else if (pos === 18) {
-        baseRentPay(18, cardKfc);
+        baseRentPay(18, cards.Kfc);
     }
     else if (pos === 19) {
-        baseRentPay(19, cardMcDonalds); 
+        baseRentPay(19, cards.McDonalds); 
     }
     else if (pos === 22) {
         cardChanse.generate();
@@ -59,23 +59,25 @@ function playerPosCheck() {
     }
 }
 
-function baseRentPay(cardName) {
+const username = localStorage.getItem("username");
+
+function baseRentPay(cardOnClient) {
     
-    if (cardName.owner !== null || cardName.owner !== "Player") {
-        if (cardName.level === 0) {
-            debt(cardName.baseRent0);
+    if (cardOnClient.owner !== null || cardOnClient.owner !== username) {
+        if (cardOnClient.level === 0) {
+            debt(cardOnClient.baseRent0);
         }
-        else if (cardName.level === 1) {
-            debt(cardName.baseRent1);
+        else if (cardOnClient.level === 1) {
+            debt(cardOnClient.baseRent1);
         }
-        else if (cardName.level === 2) {
-            debt(cardName.baseRent2);
+        else if (cardOnClient.level === 2) {
+            debt(cardOnClient.baseRent2);
         }
         else {
-            debt(cardName.baseRent3);
+            debt(cardOnClient.baseRent3);
         }
     }
-    else if (cardName.owner === null) {
+    else if (cardOnClient.owner === null) {
         console.log("Card is Null");
     }
 }

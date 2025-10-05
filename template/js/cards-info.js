@@ -1,5 +1,7 @@
 import { player1 } from "./main.js";
-import { cards } from "./cards-values.js";
+import { cards } from "./cards-values-client.js";
+
+const socket = io("http://localhost:3200");
 
 const cardsSec = [
     document.getElementById("playerSec2"),
@@ -103,6 +105,10 @@ const cardBuying = {
         },
 
         upgrade3: (cardOnClient) => {
+            let levelText = document.getElementById("levelText");
+            let priceText = document.getElementById("priceText");
+            let btnText = document.getElementById("cardBtnText");
+
             playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
             baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent3;
@@ -203,7 +209,7 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     }
     imgBG.appendChild(imgLogo);
     
-    // TEXT BLOCK
+    // TEXT INFO BLOCK
     const infoText = document.createElement("div");
     infoText.id = "infoTextCard";
     cardBG.appendChild(infoText);
@@ -263,7 +269,7 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     }
     infoText.appendChild(priceText);
 
-    // LEVELS
+    // LEVELS OF CARD
     const levelsBG = document.createElement("div");
     levelsBG.id = "levelsOfCard";
     cardBG.appendChild(levelsBG);
@@ -299,7 +305,7 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     }
     levelsBG.appendChild(levelDiv3);
 
-    // BUTTON
+    // BUY/UPGRADE BUTTON
     let mainBtn = document.createElement("button");
     mainBtn.id = "cardUpgradeBtn";
     cardBG.appendChild(mainBtn);
@@ -325,7 +331,15 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     const vignette = document.createElement("div");
     vignette.id = "buttonVignette";
     mainBtn.appendChild(vignette);
+
+    // SENDING REQUEST TO SERVER
+    mainBtn.addEventListener("click", () => {
+        let cardOnClient = Object.values(cards).find(card => card.name === cardOpened.condition);
+        socket.emit("cardBuyingReq", cardOnClient);
+        console.log("Buying request has been sent");
+    });
 }
+
 
 function cardColorBgDefine(obj, name) {
     if (name === "CocaCola" || name === "Nestle") {
@@ -356,14 +370,14 @@ function cardColorBgDefine(obj, name) {
 
 let cardOpened = { condition: null }
 
-function cardOpen(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, price, upgradePrice1, upgradePrice2, upgradePrice3, cardName) {
+function cardOpen(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, upgradePrice1, upgradePrice2, upgradePrice3, cardName) {
     let gui = document.getElementById("gui");
     if (cardOpened.condition) {
         let cardBG = document.getElementById("cardInfoBG");
         gui.removeChild(cardBG);
     }
     
-    cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, price, upgradePrice1, upgradePrice2, upgradePrice3, cardName);
+    cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, upgradePrice1, upgradePrice2, upgradePrice3, cardName);
     gui.style.backdropFilter = "blur(3px)";
     randomBtn.style.zIndex = "0";
 
@@ -382,6 +396,7 @@ function cardClose() {
 
 
 
+// OPEN/CLOSE CARD BUTTONS
 cardsSec[0].addEventListener("click", () => {
     if (cardOpened.condition === cards.CocaCola.name) {
         cards.CocaCola.close();

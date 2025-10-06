@@ -1,4 +1,3 @@
-// import { cards } from "./cards";
 const cards = require("./cards-values-server");
 
 function cardBuying(cardOnServer, currentPlayer) {

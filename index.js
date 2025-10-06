@@ -180,7 +180,7 @@ io.on("connection", (socket) => {
 });
 
 const PORT = 3200;
-const HOST = "localhost";
+const HOST = "0.0.0.0";
 
 server.listen(PORT, HOST, () => {
     console.log(`Server runed: ${HOST}:${PORT}`);

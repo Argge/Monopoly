@@ -1,5 +1,7 @@
 import { playerPosCheck } from "./player-position-check.js";
 
+const socket = io(`http://${window.location.hostname}:3200`);
+
 const cards = [
     document.getElementById("playerSec1"),
     document.getElementById("playerSec2"),
@@ -70,14 +72,13 @@ class Player {
         }
            
         playerRender(this.positionNew, this.positionOld);
-
         playerPosCheck();
     }
 }
 
 function playerRender(positionNew, positionOld) {
     const player = document.createElement("div");
-    player.id = "player";
+    player.id = socket.id;
 
     cards[positionNew].appendChild(player);
     cards[positionOld].innerHTML = "";

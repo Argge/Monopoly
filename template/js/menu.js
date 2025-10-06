@@ -8,6 +8,6 @@ playBtn.addEventListener("click", () => {
     }
     else {
         localStorage.setItem("username", usernameInp);
-        document.location.replace("http://localhost:3200/monopoly.html");
+        document.location.replace(`http://${window.location.hostname}:3200/monopoly.html`);
     }
 });

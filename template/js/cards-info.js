@@ -1,7 +1,7 @@
 import { player1 } from "./main.js";
 import { cards } from "./cards-values-client.js";
 
-const socket = io("http://localhost:3200");
+const socket = io(`http://${window.location.hostname}:3200`);
 
 const cardsSec = [
     document.getElementById("playerSec2"),
@@ -174,39 +174,22 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     const imgLogo = document.createElement("img");
     imgLogo.id = "cardLogo";
     imgLogo.setAttribute("src", "");
-    if (name === "CocaCola") {
-        imgLogo.src = "img/logo/white_logos/coca-cola_logo.png";
+
+    const imgMap = {
+        "CocaCola": "img/logo/white_logos/coca-cola_logo.png",
+        "Nestle": "img/logo/white_logos/nestle_logo.png",
+        "Nike": "img/logo/white_logos/nike_logo.png",
+        "Adidas": "img/logo/white_logos/adidas_logo.png",
+        "NewBalance": "img/logo/white_logos/new-balance_logo.png",
+        "Instagram": "img/logo/white_logos/instagram_logo.png",
+        "TikTok": "img/logo/tik_tok_logo.png",
+        "YouTube": "img/logo/white_logos/you-tube_logo.png",
+        "BurgerKing": "img/logo/burger_king_logo.png",
+        "Kfc": "img/logo/white_logos/kfc_logo.png",
+        "McDonalds": "img/logo/mcdonalds_logo.webp"
     }
-    else if (name === "Nestle") {
-        imgLogo.src = "img/logo/white_logos/nestle_logo.png";
-    }
-    else if (name === "Nike") {
-        imgLogo.src = "img/logo/white_logos/nike_logo.png";
-    }
-    else if (name === "Adidas") {
-        imgLogo.src = "img/logo/white_logos/adidas_logo.png";
-    }
-    else if (name === "NewBalance") {
-        imgLogo.src = "img/logo/white_logos/new-balance_logo.png";
-    }
-    else if (name === "Instagram") {
-        imgLogo.src = "img/logo/white_logos/instagram_logo.png";
-    }
-    else if (name === "TikTok") {
-        imgLogo.src = "img/logo/tik_tok_logo.png";
-    }
-    else if (name === "YouTube") {
-        imgLogo.src = "img/logo/white_logos/you-tube_logo.png";
-    }
-    else if (name === "BurgerKing") {
-        imgLogo.src = "img/logo/burger_king_logo.png";
-    }
-    else if (name === "Kfc") {
-        imgLogo.src = "img/logo/white_logos/kfc_logo.png";
-    }
-    else if (name === "McDonalds") {
-        imgLogo.src = "img/logo/mcdonalds_logo.webp";
-    }
+
+    imgLogo.src = imgMap[name];
     imgBG.appendChild(imgLogo);
     
     // TEXT INFO BLOCK
@@ -215,12 +198,8 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     cardBG.appendChild(infoText);
 
     let ownerText = document.createElement("span");
-    if (owner === null) {
-        ownerText.textContent = "OWNER: NONE";    
-    }
-    else {
-        ownerText.textContent = "OWNER: " + owner;
-    }
+    if (owner === null) ownerText.textContent = "OWNER: NONE";
+    else ownerText.textContent = `OWNER: ${owner}`;
     ownerText.id = name;
     infoText.appendChild(ownerText);
 
@@ -229,43 +208,29 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     if (owner === null) {
         baseRentText.textContent = "BASE RENT: 0";
     }
-    else if (owner !== null || level === 0) {
-        baseRentText.textContent = "BASE RENT: " + baseRent0;    
-    }
-    else if (owner !== null || level === 1) {
-        baseRentText.textContent = "BASE RENT: " + baseRent1;    
-    }
-    else if (owner !== null || level === 2) {
-        baseRentText.textContent = "BASE RENT: " + baseRent2;    
-    }
-    else if (owner !== null || level === 3) {
-        baseRentText.textContent = "BASE RENT: " + baseRent3;    
+    else {
+        if (level === 0) baseRentText.textContent = `BASE RENT: ${baseRent0}`;
+        else if (level === 1) baseRentText.textContent = `BASE RENT: ${baseRent1}`;
+        else if (level === 2) baseRentText.textContent = `BASE RENT: ${baseRent2}`;
+        else baseRentText.textContent = `BASE RENT: ${baseRent3}`;
     }
     infoText.appendChild(baseRentText);
     
     let levelText = document.createElement("span");
     levelText.id = "levelText";
-    levelText.textContent = "LEVEL: " + level;
+    levelText.textContent = `LEVEL: ${level}`;
     infoText.appendChild(levelText);
 
     let priceText = document.createElement("span");
     priceText.id = "priceText";
     if (owner === null) {
-        priceText.textContent = "PRICE: " + price + "$";
+        priceText.textContent = `PRICE: ${price}$`;
     }
     else {
-        if (level === 0) {
-            priceText.textContent = `FOR UPGRADE: ${upgradePrice1}$`;
-        }
-        else if (level === 1) {
-            priceText.textContent = `FOR UPGRADE: ${upgradePrice2}$`;
-        }
-        else if (level === 2) {
-            priceText.textContent = `FOR UPGRADE: ${upgradePrice3}$`;
-        }
-        else {
-            priceText.textContent = "";
-        }
+        if (level === 0) priceText.textContent = `FOR UPGRADE: ${upgradePrice1}$`;
+        else if (level === 1) priceText.textContent = `FOR UPGRADE: ${upgradePrice2}$`;
+        else if (level === 2) priceText.textContent = `FOR UPGRADE: ${upgradePrice3}$`;
+        else priceText.textContent = "";
     }
     infoText.appendChild(priceText);
 
@@ -276,33 +241,20 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
 
     let levelDiv1 = document.createElement("div");
     levelDiv1.id = "levelBlock1";
-    if (level === 0) {
-        levelDiv1.classList.add("cardLevel0");
-    }
-    else {
-        levelDiv1.classList.add("cardLevel1");
-    }
-    
+    if (level === 0) levelDiv1.classList.add("cardLevel0");
+    else levelDiv1.classList.add("cardLevel1");
     levelsBG.appendChild(levelDiv1);
 
     let levelDiv2 = document.createElement("div");
     levelDiv2.id = "levelBlock2";
-    if (level === 0 || level === 1) {
-        levelDiv2.classList.add("cardLevel0");
-    }
-    else {
-        levelDiv2.classList.add("cardLevel1");
-    }
+    if (level === 0 || level === 1) levelDiv2.classList.add("cardLevel0");
+    else levelDiv2.classList.add("cardLevel1");
     levelsBG.appendChild(levelDiv2);
 
     let levelDiv3 = document.createElement("div");
     levelDiv3.id = "levelBlock3";
-    if (level === 0 || level === 1 || level === 2) {
-        levelDiv3.classList.add("cardLevel0");
-    }
-    else {
-        levelDiv3.classList.add("cardLevel1");
-    }
+    if (level === 0 || level === 1 || level === 2) levelDiv3.classList.add("cardLevel0");
+    else levelDiv3.classList.add("cardLevel1");
     levelsBG.appendChild(levelDiv3);
 
     // BUY/UPGRADE BUTTON
@@ -316,15 +268,9 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
     mainBtn.appendChild(btnBG);
 
     let textBtn = document.createElement("span");
-    if (owner === null) {
-        textBtn.textContent = "BUY";
-    }
-    else if (level === 0 || level === 1 || level === 2) {
-        textBtn.textContent = "UPGRADE";
-    }
-    else {
-        textBtn.textContent = "MAX";
-    }
+    if (owner === null) textBtn.textContent = "BUY";
+    else if (level === 0 || level === 1 || level === 2) textBtn.textContent = "UPGRADE";
+    else textBtn.textContent = "MAX";
     textBtn.id = "cardBtnText"; 
     mainBtn.appendChild(textBtn);
 
@@ -341,30 +287,44 @@ function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level
 }
 
 
-function cardColorBgDefine(obj, name) {
-    if (name === "CocaCola" || name === "Nestle") {
-        obj.classList.add("colorBG1");
-    }
-    else if (name === "Nike" || name === "Adidas" || name === "NewBalance") {
-        obj.classList.add("colorBG2");
-    }
-    else if (name === "Instagram" || name === "TikTok" || name === "YouTube") {
-        obj.classList.add("colorBG3");
-    }
-    else if (name === "BurgerKing" || name === "Kfc" || name === "McDonalds") {
-        obj.classList.add("colorBG4");
-    }
-    else if (name === "Oracle" || name === "Amazone" || name === "Microsoft") {
-        obj.classList.add("colorBG5");
-    }
-    else if (name === "Mercedes" || name === "Audi" || name === "Toyota") {
-        obj.classList.add("colorBG6");
-    }
-    else if (name === "Samsung" || name === "Apple" || name === "Google") {
-        obj.classList.add("colorBG7");
-    }
-    else {
-        obj.classList.add("colorBG8");
+function cardColorBgDefine(object, name) {
+    switch (name) {
+        case "CocaCola":
+        case "Nestle":
+            object.classList.add("colorBG1");
+            break;
+        case "Nile":
+        case "Adidas":
+        case "NewBalance":
+            object.classList.add("colorBG2");
+            break;
+        case "Instagram":
+        case "TikTok":
+        case "YouTube":
+            object.classList.add("colorBG3");
+            break;
+        case "BurgerKing":
+        case "Kfc":
+        case "McDonalds":
+            object.classList.add("colorBG4");
+            break;
+        case "Oracle":
+        case "Amazone":
+        case "Microsoft":
+            object.classList.add("colorBG5");
+            break;
+        case "Mercedes":
+        case "Audi":
+        case "Toyota":
+            object.classList.add("colorBG6");
+            break;
+        case "Samsung":
+        case "Apple":
+        case "Google":
+            object.classList.add("colorBG7");
+            break;
+        default:
+            object.classList.add("colorBG8");
     }
 }
 
@@ -398,102 +358,58 @@ function cardClose() {
 
 // OPEN/CLOSE CARD BUTTONS
 cardsSec[0].addEventListener("click", () => {
-    if (cardOpened.condition === cards.CocaCola.name) {
-        cards.CocaCola.close();
-    }
-    else {
-        cards.CocaCola.open();
-    }
+    if (cardOpened.condition === cards.CocaCola.name) cards.CocaCola.close();
+    else cards.CocaCola.open();
 });
 
 cardsSec[2].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Nestle.name) {
-        cards.Nestle.close();
-    }
-    else {
-        cards.Nestle.open();
-    }
+    if (cardOpened.condition === cards.Nestle.name) cards.Nestle.close();
+    else cards.Nestle.open();
 });
 
 cardsSec[5].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Nike.name) {
-        cards.Nike.close();
-    }
-    else {
-        cards.Nike.open();
-    }
+    if (cardOpened.condition === cards.Nike.name) cards.Nike.close();
+    else cards.Nike.open();
 });
 
 cardsSec[7].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Adidas.name) {
-        cards.Adidas.close();
-    }
-    else {
-        cards.Adidas.open();
-    }
+    if (cardOpened.condition === cards.Adidas.name) cards.Adidas.close();
+    else cards.Adidas.open();
 });
 
 cardsSec[8].addEventListener("click", () => {
-    if (cardOpened.condition === cards.NewBalance.name) {
-        cards.NewBalance.close();
-    }
-    else {
-        cards.NewBalance.open();
-    }
+    if (cardOpened.condition === cards.NewBalance.name) cards.NewBalance.close();
+    else cards.NewBalance.open();
 });
 
 cardsSec[9].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Instagram.name) {
-        cards.Instagram.close();
-    }
-    else {
-        cards.Instagram.open();
-    }
+    if (cardOpened.condition === cards.Instagram.name) cards.Instagram.close();
+    else cards.Instagram.open();
 });
 
 cardsSec[11].addEventListener("click", () => {
-    if (cardOpened.condition === cards.TikTok.name) {
-        cards.TikTok.close();
-    }
-    else {
-        cards.TikTok.open();
-    }
+    if (cardOpened.condition === cards.TikTok.name) cards.TikTok.close();
+    else cards.TikTok.open();
 });
 
 cardsSec[12].addEventListener("click", () => {
-    if (cardOpened.condition === cards.YouTube.name) {
-        cards.YouTube.close();
-    }
-    else {
-        cards.YouTube.open();
-    }
+    if (cardOpened.condition === cards.YouTube.name) cards.YouTube.close();
+    else cards.YouTube.open();
 });
 
 cardsSec[14].addEventListener("click", () => {
-    if (cardOpened.condition === cards.BurgerKing.name) {
-        cards.BurgerKing.close();
-    }
-    else {
-        cards.BurgerKing.open();
-    }
+    if (cardOpened.condition === cards.BurgerKing.name) cards.BurgerKing.close();
+    else cards.BurgerKing.open();
 });
 
 cardsSec[16].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Kfc.name) {
-        cards.Kfc.close();
-    }
-    else {
-        cards.Kfc.open();
-    }
+    if (cardOpened.condition === cards.Kfc.name) cards.Kfc.close();
+    else cards.Kfc.open();
 });
 
 cardsSec[17].addEventListener("click", () => {
-    if (cardOpened.condition === cards.McDonalds.name) {
-        cards.McDonalds.close();
-    }
-    else {
-        cards.McDonalds.open();
-    }
+    if (cardOpened.condition === cards.McDonalds.name) cards.McDonalds.close();
+    else cards.McDonalds.open();
 });
 
 export { cardInfoRender, cardOpen, cardClose, cardBuying, cardOpened }

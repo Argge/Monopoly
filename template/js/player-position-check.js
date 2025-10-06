@@ -4,58 +4,35 @@ import { cardChanse, messegeRender } from "./chanse-card.js";
 
 
 function playerPosCheck() {
-    let pos = player1.positionNew;
-    if (pos === 1) {
-        baseRentPay(cards.CocaCola);
+    let position = player1.positionNew;
+
+    const rentMap = {
+        1: cards.CocaCola,
+        3: cards.Nestle,
+        6: cards.Nike,
+        8: cards.Adidas,
+        9: cards.NewBalance,
+        11: cards.Instagram,
+        13: cards.TikTok,
+        14: cards.YouTube,
+        16: cards.BurgerKing,
+        18: cards.Kfc,
+        19: cards.McDonalds
     }
-    else if (pos === 3) {
-        baseRentPay(cards.Nestle);
-    }
-    else if (pos === 6) {
-        baseRentPay(cards.Nike);
-    }
-    else if (pos === 7) {
-        cardChanse.generate();
-    }
-    else if (pos === 8) {
-        baseRentPay(cards.Adidas);
-    }
-    else if (pos === 9) {
-        baseRentPay(cards.NewBalance);
-    }
-    else if (pos === 10 && player1.positionOld !== 30) {
+
+    const chanseMap = [7, 22, 36];
+
+    if (rentMap[position]) baseRentPay(rentMap[pos]);
+    else if (chanseMap.includes(position)) cardChanse.generate();
+    else if (position === 10 && player1.positionOld !== 30) {
         debt(5000);
-        messegeRender("YOU STAYED IN JAIL ", "AND", " MISS A MOVE");
+        messegeRender("YOU STAYED IN JAIL AND MISS A MOVE");
     }
-    else if (pos === 11) {
-        baseRentPay(cards.Instagram);
-    }
-    else if (pos === 13) {
-        baseRentPay(cards.TikTok);
-    }
-    else if (pos === 14) {
-        baseRentPay(cards.YouTube);
-    }
-    else if (pos === 16) {
-        baseRentPay(cards.BurgerKing);
-    }
-    else if (pos === 18) {
-        baseRentPay(18, cards.Kfc);
-    }
-    else if (pos === 19) {
-        baseRentPay(19, cards.McDonalds); 
-    }
-    else if (pos === 22) {
-        cardChanse.generate();
-    }
-    else if (pos === 30) {
+    else if (position === 30) {
         player1.move(-20);
         debt(5000);
         player1.positionNew = 10;
-        messegeRender("GO TO JAIL ", "WIHOUT ", "PASSING THE START");
-    }
-    else if (pos === 36) {
-        cardChanse.generate();
+        messegeRender("GO TO JAIL WIHOUT PASSING THE START");
     }
 }
 
@@ -64,18 +41,7 @@ const username = localStorage.getItem("username");
 function baseRentPay(cardOnClient) {
     
     if (cardOnClient.owner !== null || cardOnClient.owner !== username) {
-        if (cardOnClient.level === 0) {
-            debt(cardOnClient.baseRent0);
-        }
-        else if (cardOnClient.level === 1) {
-            debt(cardOnClient.baseRent1);
-        }
-        else if (cardOnClient.level === 2) {
-            debt(cardOnClient.baseRent2);
-        }
-        else {
-            debt(cardOnClient.baseRent3);
-        }
+        debt(cardOnClient[`baseRent${cardOnClient.level}`]);
     }
     else if (cardOnClient.owner === null) {
         console.log("Card is Null");
@@ -85,7 +51,7 @@ function baseRentPay(cardOnClient) {
 function debt(value1) {
     if (player1.bank >= value1) {
         player1.bank -= value1;
-        playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+        playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
     }
     // DEBT LOGIC
     else if (player1.bank < value1) {
@@ -93,7 +59,7 @@ function debt(value1) {
         debt = value1 - player1.bank;
         player1.debt += debt;
         player1.bank = 0;
-        playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+        playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
     }
 }
 

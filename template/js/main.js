@@ -3,7 +3,7 @@ import { Dice } from "./dice.js";
 import { cardBuying } from "./cards-info.js";
 import { cards } from "./cards-values-client.js";
 
-const socket = io("http://localhost:3200");
+const socket = io(`http://${window.location.hostname}:3200`);
 
 const username = localStorage.getItem("username");
 const randomBtn = document.getElementById("randomBtn");
@@ -78,18 +78,10 @@ socket.on("buyingTrue", ({playerId, playerCards, bank, cardOnServer}) => {
         cardOnClient.owner =  cardOnServer.owner;
         cardOnClient.level =  cardOnServer.level;
 
-        if (cardOnServer.level === 0) {
-            cardBuying.firstBuy(cardOnServer);
-        }
-        else if (cardOnServer.level === 1) {
-            cardBuying.upgrade1(cardOnServer);
-        }
-        else if (cardOnServer.level === 2) {
-            cardBuying.upgrade2(cardOnServer);
-        }
-        else {
-            cardBuying.upgrade3(cardOnServer);
-        }
+        if (cardOnServer.level === 0) cardBuying.firstBuy(cardOnServer);
+        else if (cardOnServer.level === 1) cardBuying.upgrade1(cardOnServer);
+        else if (cardOnServer.level === 2) cardBuying.upgrade2(cardOnServer);
+        else cardBuying.upgrade3(cardOnServer);
     }
 });
 

@@ -9,6 +9,7 @@ const { rollDice } = require("./moduls/dice.js");
 const { start } = require("./moduls/start.js");
 const { cardCheking } = require("./moduls/cards-buying.js");
 const { router } = require("./moduls/route.js");
+const cards = require("./moduls/cards-values-server.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -23,14 +24,15 @@ app.use(router);
 let gameState = {
     players: [],
     currentTurn: 0,
-    board: []
+    cards: cards
 }
 
 io.on("connection", (socket) => {
-    socket.on("joinGame", (playerName) => {
-        gameState.players.push({
+    socket.on("joinGame", ({ username, color }) => {
+        const newPlayer = {
             id: socket.id,
-            name: playerName,
+            name: username,
+            color: color,
             positionNew: 0,
             positionOld: 0,
             lapsNew: 0,
@@ -38,27 +40,16 @@ io.on("connection", (socket) => {
             bank: 1000,
             debt: 0,
             cards: []
-        });
+        };
 
-        console.log("Player joined:", playerName);
+        gameState.players.push(newPlayer)
 
-        const currentPlayer = gameState.players[gameState.currentTurn];
+        console.log("Player joined:", username);
 
-        io.emit("gameState", {
-            playerId: currentPlayer.id,
-            name: currentPlayer.name,
-            positionNew: currentPlayer.positionNew,
-            positionOld: currentPlayer.positionOld,
-            lapsNew: currentPlayer.lapsNew,
-            lapsOld: currentPlayer.lapsOld,
-            bank: currentPlayer.bank,
-            debt: currentPlayer.debt,
-            cards: currentPlayer.cards
-        });
+        io.emit("gameState", gameState);
     });
 
-    socket.on("rollDice", () => {
-        
+    socket.on("rollDice", () => {  
         if (gameState.players.length === 0) {
             console.log("No players in game");
             return;
@@ -77,9 +68,8 @@ io.on("connection", (socket) => {
         currentPlayer.positionNew += result;
 
         io.emit("diceResult", {
-            playerId: currentPlayer.id,
-            result,
-            position: currentPlayer.positionNew 
+            gameState: gameState,
+            result: result    
         });
 
         gameState.currentTurn = (gameState.currentTurn++) % gameState.players.length;
@@ -106,13 +96,7 @@ io.on("connection", (socket) => {
             let startChek = start(currentPlayer);
 
             if (startChek === true) {
-                io.emit("startTrue", {
-                    playerId: currentPlayer.id,
-                    lapsOld: currentPlayer.lapsOld,
-                    lapsNew: currentPlayer.lapsNew,
-                    bank: currentPlayer.bank,
-                    debt: currentPlayer.debt
-                });
+                io.emit("startTrue", gameState);
             }
         }
 
@@ -136,14 +120,13 @@ io.on("connection", (socket) => {
         let cardBuyResult = cardCheking(cardOnClient, currentPlayer);
 
         if (cardBuyResult === false) {
-            io.emit("buyingFalse");
+            io.emit("buyingFalse", currentPlayer.id);
             console.log("Buying false");
         }
         else {
             io.emit("buyingTrue", {
                 playerId: currentPlayer.id,
-                playerCards: currentPlayer.cards,
-                bank: currentPlayer.bank,
+                gameState: gameState,
                 cardOnServer: cardBuyResult
             });
             console.log("Buying true");

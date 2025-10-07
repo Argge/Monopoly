@@ -46,15 +46,23 @@ const cards = [
 ];
 
 class Player {
-    id = null;
-    name = null;
-    positionNew = 0;
-    positionOld = 0;
-    lapsNew = 0;
-    lapsOld = 0;
-    bank = 1000;
-    debt = 0;
-    cards = [];
+    constructor(id, name, color) {
+        this.id = id;
+        this.name = name;
+        this.color = color
+        this.positionNew = 0;
+        this.positionOld = 0;
+        this.lapsNew = 0;
+        this.lapsOld = 0;
+        this.bank = 1000;
+        this.debt = 0;
+        this.cards = [];
+
+        this.playerDom = document.createElement("div");
+        this.playerDom.classList.add("player");
+        this.playerDom.classList.add(this.color);
+        this.playerDom.id = socket.id;
+    }
 
     move(steps) {
         this.positionOld = this.positionNew;
@@ -74,14 +82,14 @@ class Player {
         playerRender(this.positionNew, this.positionOld);
         playerPosCheck();
     }
+    
 }
 
-function playerRender(positionNew, positionOld) {
-    const player = document.createElement("div");
-    player.id = socket.id;
-
-    cards[positionNew].appendChild(player);
-    cards[positionOld].innerHTML = "";
+function playerRender(player) {
+    if (cards[player.positionOld].contains(player.playerDom)) {
+        cards[player.positionOld].removeChild(player.playerDom);
+    }
+    cards[player.positionNew].appendChild(player.playerDom);
 }
 
 export { Player }

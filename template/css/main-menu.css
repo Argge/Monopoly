@@ -16,3 +16,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+#colorChange {
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+
+    gap: 5px;
+}

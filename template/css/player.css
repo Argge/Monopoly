@@ -1,7 +1,22 @@
-#player {
+.player {
     width: 20px;
     height: 20px;
 
     border-radius: 50%;
-    background-color: #fff;
+}
+
+.playerRed {
+    background-color: #ff0000;
+}
+
+.playerBlue {
+    background-color: #2600ff;
+}
+
+.playerYellow {
+    background-color: #ffea00;
+}
+
+.playerGreen {
+    background-color: #09ff00;
 }

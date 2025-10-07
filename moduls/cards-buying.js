@@ -1,4 +1,4 @@
-const cards = require("./cards-values-server");
+const cards = require("./cards-values-server.js");
 
 function cardBuying(cardOnServer, currentPlayer) {
     if (cardOnServer.owner === null) {

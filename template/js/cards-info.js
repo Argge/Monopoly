@@ -1,4 +1,4 @@
-import { player1 } from "./main.js";
+import { gameStateOnClient } from "./main.js";
 import { cards } from "./cards-values-client.js";
 
 const socket = io(`http://${window.location.hostname}:3200`);
@@ -41,6 +41,8 @@ const cardsSec = [
     document.getElementById("playerSec39"),
     document.getElementById("playerSec40"),
 ];
+
+let player1 = Object.values(gameStateOnClient).find(player => player.id = socket.id);
 
 const cardBuying = {
         firstBuy: (cardOnClient) => {

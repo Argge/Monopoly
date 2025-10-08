@@ -1,5 +1,3 @@
-// import { cards } from "./moduls/cards.js";
-
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -21,16 +19,16 @@ app.use(express.static(path.join(__dirname, "template")));
 
 app.use(router);
 
-let gameState = {
+let gameStateOnServer = {
     players: [],
     currentTurn: 0,
     cards: cards
 }
 
 io.on("connection", (socket) => {
-    socket.on("joinGame", ({ username, color }) => {
+    socket.on("joinGame", ({ username, color, id }) => {
         const newPlayer = {
-            id: socket.id,
+            id: id,
             name: username,
             color: color,
             positionNew: 0,
@@ -42,20 +40,20 @@ io.on("connection", (socket) => {
             cards: []
         };
 
-        gameState.players.push(newPlayer)
+        gameStateOnServer.players.push(newPlayer)
 
         console.log("Player joined:", username);
 
-        io.emit("gameState", gameState);
+        io.emit("gameStateOnServer", gameStateOnServer);
     });
 
     socket.on("rollDice", () => {  
-        if (gameState.players.length === 0) {
+        if (gameStateOnServer.players.length === 0) {
             console.log("No players in game");
             return;
         }
 
-        const currentPlayer = gameState.players[gameState.currentTurn];
+        const currentPlayer = gameStateOnServer.players[gameStateOnServer.currentTurn];
 
         if (!currentPlayer) {
             console.log("Error: currentPlayer is not foundet");
@@ -68,20 +66,20 @@ io.on("connection", (socket) => {
         currentPlayer.positionNew += result;
 
         io.emit("diceResult", {
-            gameState: gameState,
+            gameStateOnServer: gameStateOnServer,
             result: result    
         });
 
-        gameState.currentTurn = (gameState.currentTurn++) % gameState.players.length;
+        gameStateOnServer.currentTurn = (gameStateOnServer.currentTurn++) % gameStateOnServer.players.length;
     });
 
     socket.on("startCheck", () => {
-        if (gameState.players.length === 0) {
+        if (gameStateOnServer.players.length === 0) {
             console.log("No players in game");
             return;
         }
 
-        const currentPlayer = gameState.players[gameState.currentTurn];
+        const currentPlayer = gameStateOnServer.players[gameStateOnServer.currentTurn];
 
         if (!currentPlayer) {
             console.log("Error: currentPlayer is not foundet");
@@ -96,7 +94,7 @@ io.on("connection", (socket) => {
             let startChek = start(currentPlayer);
 
             if (startChek === true) {
-                io.emit("startTrue", gameState);
+                io.emit("startTrue", gameStateOnServer);
             }
         }
 
@@ -105,12 +103,12 @@ io.on("connection", (socket) => {
 
     socket.on("cardBuyingReq", (cardOnClient) => {
         console.log("Buying request has been claimed");
-        if (gameState.players.length === 0) {
+        if (gameStateOnServer.players.length === 0) {
             console.log("No players in game");
             return;
         }
 
-        const currentPlayer = gameState.players[gameState.currentTurn];
+        const currentPlayer = gameStateOnServer.players[gameStateOnServer.currentTurn];
 
         if (!currentPlayer) {
             console.log("Error: currentPlayer is not foundet");
@@ -126,7 +124,7 @@ io.on("connection", (socket) => {
         else {
             io.emit("buyingTrue", {
                 playerId: currentPlayer.id,
-                gameState: gameState,
+                gameStateOnServer: gameStateOnServer,
                 cardOnServer: cardBuyResult
             });
             console.log("Buying true");
@@ -134,21 +132,21 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-        if (gameState.currentTurn === 0) {
-            console.log("Player disconnected:", gameState.players[0].name);
+        if (gameStateOnServer.currentTurn === 0) {
+            console.log("Player disconnected:", gameStateOnServer.players[0].name);
         }
-        else if (gameState.currentTurn === 1) {
-            console.log("Player disconnected:", gameState.players[1].name);
+        else if (gameStateOnServer.currentTurn === 1) {
+            console.log("Player disconnected:", gameStateOnServer.players[1].name);
         }
-        else if (gameState.currentTurn === 2) {
-            console.log("Player disconnected:", gameState.players[2].name);
+        else if (gameStateOnServer.currentTurn === 2) {
+            console.log("Player disconnected:", gameStateOnServer.players[2].name);
         }
-        else if (gameState.currentTurn === 3) {
-            console.log("Player disconnected:", gameState.players[3].name);
+        else if (gameStateOnServer.currentTurn === 3) {
+            console.log("Player disconnected:", gameStateOnServer.players[3].name);
         }
-        gameState.players = gameState.players.filter(p => p.id !== socket.id);
+        gameStateOnServer.players = gameStateOnServer.players.filter(p => p.id !== socket.id);
 
-        io.emit("gameState", {
+        io.emit("gameStateOnServer", {
             playerId: currentPlayer.id,
             name: currentPlayer.name,
             positionNew: currentPlayer.positionNew,

@@ -1,5 +1,7 @@
-import { player1 } from "./main.js";
+import { gameStateOnClient } from "./main.js";
 import { debt } from "./player-position-check.js";
+
+let player1 = Object.values(gameStateOnClient).find(player => player.id = socket.id);
 
 class Chanse {
     generate() {

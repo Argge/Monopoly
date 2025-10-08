@@ -1,4 +1,3 @@
-import { Player } from "./player.js";
 import { Dice } from "./dice.js";
 import { cardBuying } from "./cards-info.js";
 import { cards } from "./cards-values-client.js";
@@ -8,7 +7,7 @@ const socket = io(`http://${window.location.hostname}:3200`);
 const username = localStorage.getItem("username");
 const color = localStorage.getItem("color");
 const randomBtn = document.getElementById("randomBtn");
-const cardsCheckBtn = document.getElementById("cardsCheckBtn");
+// const cardsCheckBtn = document.getElementById("cardsCheckBtn");
 
 let gameStateOnClient = {
     players: [],
@@ -19,13 +18,13 @@ let gameStateOnClient = {
 socket.on("connect", () => {
         console.log("Connected:", username);
         socket.emit("joinGame", {
+            id: socket.id,
             username: username,
             color: color
         });
 });
 
 const dice = new Dice;
-// let player1 = new Player(id, name, color);
 
 randomBtn.addEventListener("click", () => {
     socket.emit("rollDice");
@@ -75,4 +74,4 @@ socket.on("disconnect", () => {
     console.log("Disconnected", username);
 });
 
-export { player1 }
+// export { player1 }

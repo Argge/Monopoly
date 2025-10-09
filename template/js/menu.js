@@ -2,7 +2,7 @@ const playBtn = document.getElementById("playBtn");
 
 playBtn.addEventListener("click", () => {
     const usernameInp = document.getElementById("usernameInp").value.trim();
-    const radio = document.getElementsByName("color").value;
+    const radio = document.getElementsByName("color");
     if (!usernameInp && !radio) {
         alert("Input all lands!");
         return;

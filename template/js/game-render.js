@@ -44,12 +44,44 @@ const cards = [
 ];
 
 const game = {
-    render: () => {
-        const players = document.getElementsByClassName("players");
+    render: (playersLength, result) => {
+        const player1 = gameStateOnClient.players[0];
+        const player2 = gameStateOnClient.players[1];
+        const player3 = gameStateOnClient.players[2];
+        const player4 = gameStateOnClient.players[3];
 
-        if (cards[players.positionOld].contains(players.playerDom)) {
-        cards[players.positionOld].removeChild(players.playerDom);
+        const playersMoveMap = {
+            2: () => {
+                playerMove(player1);
+                playerMove(player2);
+            },
+            3: () => {
+                playerMove(player1);
+                playerMove(player2);
+                playerMove(player3);
+            },
+            4: () => {
+                playerMove(player1);
+                playerMove(player2);
+                playerMove(player3);
+                playerMove(player4);
+            } 
         }
-        cards[players.positionNew].appendChild(players.playerDom);
+
+        playersMoveMap[playersLength];
+
+        function playerMove(player) {
+            if (cards[player.positionOld].contains(player.playerDom)) {
+                cards[player.positionOld].removeChild(player.playerDom);
+                }
+                cards[player.positionNew].appendChild(player.playerDom);
+        }
+
+
+
+        gamingDice.innerHTML = "";
+        dice.render(result);
     }
 }
+
+export { game }

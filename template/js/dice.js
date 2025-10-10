@@ -1,23 +1,15 @@
-class Dice {
-    createDice(value) {
-        if (value === 1) {
-            gamingDice1();
+const dice = {
+    render(value) {
+        const valuesMap = {
+            1: gamingDice1(),
+            2: gamingDice2(),
+            3: gamingDice3(),
+            4: gamingDice4(),
+            5: gamingDice5(),
+            6: gamingDice6()
         }
-        else if (value === 2) {
-            gamingDice2();
-        }
-        else if (value === 3) {
-            gamingDice3();
-        }
-        else if (value === 4) {
-            gamingDice4();
-        }
-        else if (value === 5) {
-            gamingDice5();
-        }
-        else {
-            gamingDice6();
-        }
+
+        valuesMap[value];
     }
 }
 
@@ -177,4 +169,4 @@ function gamingDice6() {
     bottomDiv.appendChild(dot6);
 }
 
-export { Dice }
+export { dice }

@@ -1,4 +1,4 @@
-import { Dice } from "./dice.js";
+import { game } from "./game-render.js";
 import { cardBuying } from "./cards-info.js";
 import { cards } from "./cards-values-client.js";
 
@@ -24,8 +24,6 @@ socket.on("connect", () => {
         });
 });
 
-const dice = new Dice;
-
 randomBtn.addEventListener("click", () => {
     socket.emit("rollDice");
     socket.emit("startCheck");
@@ -36,23 +34,18 @@ socket.on("gameState", (gameStateOnServer) => {
 });
 
 socket.on("diceResult", ({ gameStateOnServer, result }) => {
-        gamingDice.innerHTML = "";
-        dice.createDice(result);
-
-        player1.move(result);
-
-        console.log(`Player ${username} rolled dice: ${result}`);
-        console.log(player1);
+        console.log(`Player ${gameStateOnServer.players[gameStateOnServer.currentTurn]} rolled dice: ${result}`);
+        game.render(gameStateOnServer.players.length, result);
 
         gameStateOnClient = gameStateOnServer;
 });
 
 socket.on("startTrue", (gameStateOnServer) => {
-    gameStateOnClient = gameStateOnServer;
-    
     const player = gameStateOnClient.players.find(player => player.id === socket.id);
     playerBankCounter.textContent = `BALANCE: ${player.bank}$`;
     console.log(`Player ${player.name} claimed for start: 10000$`);
+
+    gameStateOnClient = gameStateOnServer;
 });
 
 socket.on("buyingFalse", (playerId) => {
@@ -67,6 +60,7 @@ socket.on("buyingTrue", ({ playerId, gameStateOnServer, cardOnServer }) => {
         else if (cardOnServer.level === 2) cardBuying.upgrade2(cardOnServer);
         else cardBuying.upgrade3(cardOnServer);
     }
+    
     gameStateOnClient = gameStateOnServer;
 });
 

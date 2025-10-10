@@ -1,4 +1,5 @@
 import { gameStateOnClient } from "./main.js";
+import { dice } from "./dice-client.js";
 
 const cards = [
     document.getElementById("playerSec1"),
@@ -76,7 +77,6 @@ const game = {
                 }
                 cards[player.positionNew].appendChild(player.playerDom);
         }
-
 
 
         gamingDice.innerHTML = "";

@@ -68,4 +68,4 @@ socket.on("disconnect", () => {
     console.log("Disconnected", username);
 });
 
-// export { player1 }
+export { gameStateOnClient }

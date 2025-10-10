@@ -46,11 +46,10 @@ let player1 = Object.values(gameStateOnClient).find(player => player.id = socket
 
 const cardBuying = {
         firstBuy: (cardOnClient) => {
-            let levelText = document.getElementById("levelText");
             let priceText = document.getElementById("priceText");
             let btnText = document.getElementById("cardBtnText");
 
-            playerBankCounter.textContent = "BALANCE: " + player1.bank + "$";
+            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
             let ownerText = document.getElementById(cardOnClient.name);
 
@@ -69,7 +68,6 @@ const cardBuying = {
         upgrade1: (cardOnClient) => {
             let levelText = document.getElementById("levelText");
             let priceText = document.getElementById("priceText");
-            let btnText = document.getElementById("cardBtnText");
 
             playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
@@ -89,7 +87,6 @@ const cardBuying = {
         upgrade2: (cardOnClient) => {
             let levelText = document.getElementById("levelText");
             let priceText = document.getElementById("priceText");
-            let btnText = document.getElementById("cardBtnText");
 
             playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 

@@ -1,6 +1,8 @@
-import { player1 } from "./main.js";
+import { gameStateOnClient } from "./main.js";
 import { cards } from "./cards-values-client.js";
 import { cardChanse, messegeRender } from "./chanse-card.js";
+
+let player1 = Object.values(gameStateOnClient).find(player => player.id = socket.id);
 
 
 function playerPosCheck() {

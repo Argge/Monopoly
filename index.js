@@ -3,7 +3,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const path = require("path");
 
-const { rollDice } = require("./moduls/dice.js");
+const { rollDice } = require("./moduls/dice-server.js");
 const { start } = require("./moduls/start.js");
 const { cardCheking } = require("./moduls/cards-buying.js");
 const { router } = require("./moduls/route.js");
@@ -26,7 +26,7 @@ let gameStateOnServer = {
 }
 
 io.on("connection", (socket) => {
-    socket.on("joinGame", ({ username, color, id }) => {
+    socket.on("joinGame", ({ id, username, color }) => {
         const newPlayer = {
             id: id,
             name: username,

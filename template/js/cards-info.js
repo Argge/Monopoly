@@ -53,11 +53,11 @@ const cardBuying = {
 
             let ownerText = document.getElementById(cardOnClient.name);
 
-            ownerText.textContent = "OWNER: " + cardOnClient.owner;
+            ownerText.textContent = `OWNER: ${cardOnClient.owner}`;
 
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent0;
+            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent0}`;
 
-            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice1;
+            priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice1}`;
 
             btnText.textContent = "UPGRADE";
 
@@ -71,16 +71,16 @@ const cardBuying = {
 
             playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent1;
+            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent1}`;
 
             levelText.textContent = "LEVEL: 1";
 
-            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice2;
+            priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice2}`;
 
             let levelBlock = document.getElementById("levelBlock1");
             levelBlock.classList.add("cardLevel1");
 
-            console.log("Player upgraded card: " + cardOnClient.name + " to 1LVL!");
+            console.log(`Player upgraded card: ${cardOnClient.name} to 1LVL!`);
             console.log(player1.bank);
         },
 
@@ -90,16 +90,16 @@ const cardBuying = {
 
             playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent2;
+            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent2}`;
 
             levelText.textContent = "LEVEL: 2";
 
-            priceText.textContent = "UPGRADE PRICE: " + cardOnClient.upgradePrice3;
+            priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice}`;
 
             let levelBlock = document.getElementById("levelBlock2");
             levelBlock.classList.add("cardLevel1");
 
-            console.log("Player upgraded card: " + cardOnClient.name + " to 2LVL!");
+            console.log(`Player upgraded card: ${cardOnClient.name} to 2LVL!`);
             console.log(player1.bank);
         },
 
@@ -110,7 +110,7 @@ const cardBuying = {
 
             playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
-            baseRentText.textContent = "BASE RENT: " + cardOnClient.baseRent3;
+            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent3}`;
 
             levelText.textContent = "LEVEL: 3";
 
@@ -122,7 +122,7 @@ const cardBuying = {
             btnText.textContent = "MAX";
             cardUpgradeBtn.disabled = true;
 
-            console.log("Player upgraded card: " + cardOnClient.name + " to 3LVL!");
+            console.log(`Player upgraded card: ${cardOnClient.name} to 3LVL!`);
             console.log(player1.bank);
         },
 
@@ -353,62 +353,47 @@ function cardClose() {
     cardOpened.condition = null;
 }
 
-
+function cardOpenClose(cardOnClient) {
+    if (cardOpened.condition === cardOnClient.name) cardOnClient.close();
+    else cardOnClient.open();
+}
 
 // OPEN/CLOSE CARD BUTTONS
-cardsSec[0].addEventListener("click", () => {
-    if (cardOpened.condition === cards.CocaCola.name) cards.CocaCola.close();
-    else cards.CocaCola.open();
-});
 
-cardsSec[2].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Nestle.name) cards.Nestle.close();
-    else cards.Nestle.open();
-});
+const sectionsMap = {
+    0: cardOpenClose(cards.CocaCola),
+    2: cardOpenClose(cards.Nestle),
+    5: cardOpenClose(cards.Nike),
+    7: cardOpenClose(cards.Adidas),
+    8: cardOpenClose(cards.NewBalance),
+    9: cardOpenClose(cards.Instagram),
+    11: cardOpenClose(cards.TikTok),
+    12: cardOpenClose(cards.YouTube),
+    14: cardOpenClose(cards.BurgerKing),
+    16: cardOpenClose(cards.Kfc),
+    17: cardOpenClose(cards.McDonalds)
+}
 
-cardsSec[5].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Nike.name) cards.Nike.close();
-    else cards.Nike.open();
-});
+cardsSec[0].addEventListener("click", sectionsMap[0]);
 
-cardsSec[7].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Adidas.name) cards.Adidas.close();
-    else cards.Adidas.open();
-});
+cardsSec[2].addEventListener("click", sectionsMap[2]);
 
-cardsSec[8].addEventListener("click", () => {
-    if (cardOpened.condition === cards.NewBalance.name) cards.NewBalance.close();
-    else cards.NewBalance.open();
-});
+cardsSec[5].addEventListener("click", sectionsMap[5]);
 
-cardsSec[9].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Instagram.name) cards.Instagram.close();
-    else cards.Instagram.open();
-});
+cardsSec[7].addEventListener("click", sectionsMap[7]);
 
-cardsSec[11].addEventListener("click", () => {
-    if (cardOpened.condition === cards.TikTok.name) cards.TikTok.close();
-    else cards.TikTok.open();
-});
+cardsSec[8].addEventListener("click", sectionsMap[8]);
 
-cardsSec[12].addEventListener("click", () => {
-    if (cardOpened.condition === cards.YouTube.name) cards.YouTube.close();
-    else cards.YouTube.open();
-});
+cardsSec[9].addEventListener("click", sectionsMap[9]);
 
-cardsSec[14].addEventListener("click", () => {
-    if (cardOpened.condition === cards.BurgerKing.name) cards.BurgerKing.close();
-    else cards.BurgerKing.open();
-});
+cardsSec[11].addEventListener("click", sectionsMap[11]);
 
-cardsSec[16].addEventListener("click", () => {
-    if (cardOpened.condition === cards.Kfc.name) cards.Kfc.close();
-    else cards.Kfc.open();
-});
+cardsSec[12].addEventListener("click", sectionsMap[12]);
 
-cardsSec[17].addEventListener("click", () => {
-    if (cardOpened.condition === cards.McDonalds.name) cards.McDonalds.close();
-    else cards.McDonalds.open();
-});
+cardsSec[14].addEventListener("click", sectionsMap[14]);
+
+cardsSec[16].addEventListener("click", sectionsMap[16]);
+
+cardsSec[17].addEventListener("click", sectionsMap[17]);
 
 export { cardInfoRender, cardOpen, cardClose, cardBuying, cardOpened }

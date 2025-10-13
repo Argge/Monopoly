@@ -21,14 +21,13 @@ app.use(router);
 
 let gameStateOnServer = {
     players: [],
-    currentTurn: 0,
-    cards: cards
+    currentTurn: 0
 }
 
 io.on("connection", (socket) => {
-    socket.on("joinGame", ({ id, username, color }) => {
+    socket.on("joinGame", ({ username, color }) => {
         const newPlayer = {
-            id: id,
+            id: socket.id,
             name: username,
             color: color,
             positionNew: 0,
@@ -43,8 +42,12 @@ io.on("connection", (socket) => {
         gameStateOnServer.players.push(newPlayer)
 
         console.log("Player joined:", username);
+        console.log(gameStateOnServer.players);
 
-        io.emit("gameStateOnServer", gameStateOnServer);
+        io.emit("gameStateOnServer", {
+            gameStateOnServer: gameStateOnServer,
+            cardsOnServer: cards
+        });
     });
 
     socket.on("rollDice", () => {  
@@ -70,7 +73,7 @@ io.on("connection", (socket) => {
             result: result    
         });
 
-        gameStateOnServer.currentTurn = (gameStateOnServer.currentTurn++) % gameStateOnServer.players.length;
+        gameStateOnServer.currentTurn = (gameStateOnServer.currentTurn + 1) % gameStateOnServer.players.length;
     });
 
     socket.on("startCheck", () => {
@@ -132,31 +135,31 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-        if (gameStateOnServer.currentTurn === 0) {
-            console.log("Player disconnected:", gameStateOnServer.players[0].name);
-        }
-        else if (gameStateOnServer.currentTurn === 1) {
-            console.log("Player disconnected:", gameStateOnServer.players[1].name);
-        }
-        else if (gameStateOnServer.currentTurn === 2) {
-            console.log("Player disconnected:", gameStateOnServer.players[2].name);
-        }
-        else if (gameStateOnServer.currentTurn === 3) {
-            console.log("Player disconnected:", gameStateOnServer.players[3].name);
-        }
-        gameStateOnServer.players = gameStateOnServer.players.filter(p => p.id !== socket.id);
+        const disconnectedPlayer = gameStateOnServer.players.find(player => player.id === socket.id);
 
-        io.emit("gameStateOnServer", {
-            playerId: currentPlayer.id,
-            name: currentPlayer.name,
-            positionNew: currentPlayer.positionNew,
-            positionOld: currentPlayer.positionOld,
-            lapsNew: currentPlayer.lapsNew,
-            lapsOld: currentPlayer.lapsOld,
-            bank: currentPlayer.bank,
-            debt: currentPlayer.debt,
-            cards: currentPlayer.cards
-        });
+        if (disconnectedPlayer) {
+            console.log(`Disconnected: ${disconnectedPlayer.name}`);
+        }
+        else {
+            console.log(`Disconnected unknow: ${socket.id}`);
+        }
+
+        gameStateOnServer.players = gameStateOnServer.players.filter(player => player.id !== socket.id);
+
+        if (gameStateOnServer.currentTurn >= gameStateOnServer.players.length) {
+            gameStateOnServer.currentTurn = 0;
+        }
+
+        // if (gameStateOnServer.players.length = 0) {
+        //     gameStateOnServer.players = [];
+        //     gameStateOnServer.currentTurn = 0;
+
+        //     const allCards = Object.values(cards).find(card => card.owner !== null);
+        //     allCards.owner = null;
+        //     allCards.level = 0;
+        // }
+
+        io.emit("gameStateOnServer", gameStateOnServer);
     });
 });
 

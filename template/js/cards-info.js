@@ -1,7 +1,6 @@
-import { gameStateOnClient } from "./main.js";
+import { gameStateOnClient } from "./game-state-client.js";
 import { cards } from "./cards-values-client.js";
-
-const socket = io(`http://${window.location.hostname}:3200`);
+import { socket, player1 } from "./main.js";
 
 const cardsSec = [
     document.getElementById("playerSec2"),
@@ -42,111 +41,109 @@ const cardsSec = [
     document.getElementById("playerSec40"),
 ];
 
-let player1 = Object.values(gameStateOnClient).find(player => player.id = socket.id);
-
 const cardBuying = {
-        firstBuy: (cardOnClient) => {
-            let priceText = document.getElementById("priceText");
-            let btnText = document.getElementById("cardBtnText");
+    firstBuy: (cardOnClient) => {
+        let priceText = document.getElementById("priceText");
+        let btnText = document.getElementById("cardBtnText");
 
-            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+        playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
-            let ownerText = document.getElementById(cardOnClient.name);
+        let ownerText = document.getElementById(cardOnClient.name);
 
-            ownerText.textContent = `OWNER: ${cardOnClient.owner}`;
+        ownerText.textContent = `OWNER: ${cardOnClient.owner}`;
 
-            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent0}`;
+        baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent0}`;
 
-            priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice1}`;
+        priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice1}$`;
 
-            btnText.textContent = "UPGRADE";
+        btnText.textContent = "UPGRADE";
 
-            console.log("Player buyed card: " + cardOnClient.name);
-            console.log(player1.bank);
-        },
-        
-        upgrade1: (cardOnClient) => {
-            let levelText = document.getElementById("levelText");
-            let priceText = document.getElementById("priceText");
+        console.log("Player buyed card: " + cardOnClient.name);
+        console.log(player1.bank);
+    },
+    
+    upgrade1: (cardOnClient) => {
+        let levelText = document.getElementById("levelText");
+        let priceText = document.getElementById("priceText");
 
-            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+        playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
-            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent1}`;
+        baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent1}`;
 
-            levelText.textContent = "LEVEL: 1";
+        levelText.textContent = "LEVEL: 1";
 
-            priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice2}`;
+        priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice2}$`;
 
-            let levelBlock = document.getElementById("levelBlock1");
-            levelBlock.classList.add("cardLevel1");
+        let levelBlock = document.getElementById("levelBlock1");
+        levelBlock.classList.add("cardLevel1");
 
-            console.log(`Player upgraded card: ${cardOnClient.name} to 1LVL!`);
-            console.log(player1.bank);
-        },
+        console.log(`Player upgraded card: ${cardOnClient.name} to 1LVL!`);
+        console.log(player1.bank);
+    },
 
-        upgrade2: (cardOnClient) => {
-            let levelText = document.getElementById("levelText");
-            let priceText = document.getElementById("priceText");
+    upgrade2: (cardOnClient) => {
+        let levelText = document.getElementById("levelText");
+        let priceText = document.getElementById("priceText");
 
-            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+        playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
-            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent2}`;
+        baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent2}`;
 
-            levelText.textContent = "LEVEL: 2";
+        levelText.textContent = "LEVEL: 2";
 
-            priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice}`;
+        priceText.textContent = `UPGRADE PRICE: ${cardOnClient.upgradePrice3}$`;
 
-            let levelBlock = document.getElementById("levelBlock2");
-            levelBlock.classList.add("cardLevel1");
+        let levelBlock = document.getElementById("levelBlock2");
+        levelBlock.classList.add("cardLevel1");
 
-            console.log(`Player upgraded card: ${cardOnClient.name} to 2LVL!`);
-            console.log(player1.bank);
-        },
+        console.log(`Player upgraded card: ${cardOnClient.name} to 2LVL!`);
+        console.log(player1.bank);
+    },
 
-        upgrade3: (cardOnClient) => {
-            let levelText = document.getElementById("levelText");
-            let priceText = document.getElementById("priceText");
-            let btnText = document.getElementById("cardBtnText");
+    upgrade3: (cardOnClient) => {
+        let levelText = document.getElementById("levelText");
+        let priceText = document.getElementById("priceText");
+        let btnText = document.getElementById("cardBtnText");
 
-            playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
+        playerBankCounter.textContent = `BALANCE: ${player1.bank}$`;
 
-            baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent3}`;
+        baseRentText.textContent = `BASE RENT: ${cardOnClient.baseRent3}`;
 
-            levelText.textContent = "LEVEL: 3";
+        levelText.textContent = "LEVEL: 3";
 
-            priceText.textContent = "";
+        priceText.textContent = "";
 
-            let levelBlock = document.getElementById("levelBlock3");
-            levelBlock.classList.add("cardLevel1");
+        let levelBlock = document.getElementById("levelBlock3");
+        levelBlock.classList.add("cardLevel1");
 
-            btnText.textContent = "MAX";
-            cardUpgradeBtn.disabled = true;
+        btnText.textContent = "MAX";
+        cardUpgradeBtn.disabled = true;
 
-            console.log(`Player upgraded card: ${cardOnClient.name} to 3LVL!`);
-            console.log(player1.bank);
-        },
+        console.log(`Player upgraded card: ${cardOnClient.name} to 3LVL!`);
+        console.log(player1.bank);
+    },
 
-        warnWin: () => {
-            const mainWin = document.createElement("div");
-            mainWin.id = "settingsMenu";
-            mainWin.classList.add("menuPattern");
-            gui.appendChild(mainWin);
+    warnWin: () => {
+        const mainWin = document.createElement("div");
+        mainWin.id = "settingsMenu";
+        mainWin.classList.add("menuPattern");
+        gui.appendChild(mainWin);
 
-            let infoText = document.createElement("p");
-            infoText.classList.add("infoText");
-            infoText.textContent = "NOT ENOUGH MONEY";
-            mainWin.appendChild(infoText);
+        let infoText = document.createElement("p");
+        infoText.classList.add("infoText");
+        infoText.textContent = "NOT ENOUGH MONEY";
+        mainWin.appendChild(infoText);
 
-            randomBtn.style.zIndex = "0";
+        randomBtn.style.zIndex = "0";
 
-            setTimeout( () => {
-                gui.removeChild(mainWin);
-                if (cardOpened === null) {
-                randomBtn.style.zIndex = "2";   
-                }
-                
-            }, 2500);
-        }
+        setTimeout( () => {
+            gui.removeChild(mainWin);
+            if (cardOpened === null) {
+            randomBtn.style.zIndex = "2";   
+            }
+            
+        }, 2500);
+    }
 }
 
 function cardInfoRender(owner, baseRent0, baseRent1, baseRent2, baseRent3, level, price, upgradePrice1, upgradePrice2, upgradePrice3, name) {
@@ -361,39 +358,28 @@ function cardOpenClose(cardOnClient) {
 // OPEN/CLOSE CARD BUTTONS
 
 const sectionsMap = {
-    0: cardOpenClose(cards.CocaCola),
-    2: cardOpenClose(cards.Nestle),
-    5: cardOpenClose(cards.Nike),
-    7: cardOpenClose(cards.Adidas),
-    8: cardOpenClose(cards.NewBalance),
-    9: cardOpenClose(cards.Instagram),
-    11: cardOpenClose(cards.TikTok),
-    12: cardOpenClose(cards.YouTube),
-    14: cardOpenClose(cards.BurgerKing),
-    16: cardOpenClose(cards.Kfc),
-    17: cardOpenClose(cards.McDonalds)
+    0: () => cardOpenClose(cards.CocaCola),
+    2: () => cardOpenClose(cards.Nestle),
+    5: () => cardOpenClose(cards.Nike),
+    7: () => cardOpenClose(cards.Adidas),
+    8: () => cardOpenClose(cards.NewBalance),
+    9: () => cardOpenClose(cards.Instagram),
+    11: () => cardOpenClose(cards.TikTok),
+    12: () => cardOpenClose(cards.YouTube),
+    14: () => cardOpenClose(cards.BurgerKing),
+    16: () => cardOpenClose(cards.Kfc),
+    17: () => cardOpenClose(cards.McDonalds)
 }
-
 cardsSec[0].addEventListener("click", sectionsMap[0]);
-
 cardsSec[2].addEventListener("click", sectionsMap[2]);
-
 cardsSec[5].addEventListener("click", sectionsMap[5]);
-
 cardsSec[7].addEventListener("click", sectionsMap[7]);
-
 cardsSec[8].addEventListener("click", sectionsMap[8]);
-
 cardsSec[9].addEventListener("click", sectionsMap[9]);
-
 cardsSec[11].addEventListener("click", sectionsMap[11]);
-
 cardsSec[12].addEventListener("click", sectionsMap[12]);
-
 cardsSec[14].addEventListener("click", sectionsMap[14]);
-
 cardsSec[16].addEventListener("click", sectionsMap[16]);
-
 cardsSec[17].addEventListener("click", sectionsMap[17]);
 
 export { cardInfoRender, cardOpen, cardClose, cardBuying, cardOpened }

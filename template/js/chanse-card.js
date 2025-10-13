@@ -1,7 +1,9 @@
-import { gameStateOnClient } from "./main.js";
+import { gameStateOnClient } from "./game-state-client.js";
 import { debt } from "./player-position-check.js";
 
-let player1 = Object.values(gameStateOnClient).find(player => player.id = socket.id);
+const socket = io(`http://${window.location.hostname}:3200`);
+
+let player1 = Object.values(gameStateOnClient).find(player => player.id === socket.id);
 
 class Chanse {
     generate() {

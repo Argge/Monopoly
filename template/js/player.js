@@ -1,6 +1,5 @@
 import { playerPosCheck } from "./player-position-check.js";
-
-const socket = io(`http://${window.location.hostname}:3200`);
+import { socket } from "./main.js";
 
 class Player {
     constructor(id, name, color) {

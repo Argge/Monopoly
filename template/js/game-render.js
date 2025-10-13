@@ -1,4 +1,4 @@
-import { gameStateOnClient } from "./main.js";
+import { gameStateOnClient } from "./game-state-client.js";
 import { dice } from "./dice-client.js";
 
 const cards = [
@@ -52,6 +52,7 @@ const game = {
         const player4 = gameStateOnClient.players[3];
 
         const playersMoveMap = {
+            1: () => playerMove(player1),
             2: () => {
                 playerMove(player1);
                 playerMove(player2);
